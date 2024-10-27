@@ -1,11 +1,12 @@
 {
-  "name": "todo-list",
+  "name": "battleship",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "test": "jest",
-    "watch": "webpack --watch",
+    "build watch": "webpack --watch",
+    "watch": "jest --watch .*/[^/]+.js$",
     "build": "webpack"
   },
   "keywords": [],
