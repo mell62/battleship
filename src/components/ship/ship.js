@@ -1,11 +1,15 @@
-export default ship;
+export default shipFactory;
 
-const ship = function shipFactory() {
+function shipFactory(shipName) {
   let length;
   let hits = 0;
 
   const setLength = function setLength(num) {
     length = num;
+  };
+
+  const getLength = function getLength() {
+    return this.length;
   };
 
   const hit = function increaseHit() {
@@ -18,4 +22,22 @@ const ship = function shipFactory() {
     }
     return false;
   };
-};
+
+  if (shipName === "Carrier") {
+    setLength(5);
+  }
+  if (shipName === "Battleship") {
+    setLength(4);
+  }
+  if (shipName === "Destroyer") {
+    setLength(3);
+  }
+  if (shipName === "Submarine") {
+    setLength(3);
+  }
+  if (shipName === "Patrol Boar") {
+    setLength(2);
+  }
+
+  return { getLength, hit, isSunk };
+}
