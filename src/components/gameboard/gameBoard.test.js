@@ -1,0 +1,11 @@
+import { gameBoardFactory } from "./gameBoard";
+
+test("place carrier horizontal", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Carrier", "0", "0", "horizontal");
+  expect(playerBoard.getBoard().get("0,0")).toEqual("Carrier");
+  expect(playerBoard.getBoard().get("0,1")).toEqual("Carrier");
+  expect(playerBoard.getBoard().get("0,2")).toEqual("Carrier");
+  expect(playerBoard.getBoard().get("0,3")).toEqual("Carrier");
+  expect(playerBoard.getBoard().get("0,4")).toEqual("Carrier");
+});
