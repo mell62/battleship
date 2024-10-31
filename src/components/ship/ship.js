@@ -35,7 +35,7 @@ function shipFactory(shipName) {
   if (shipName === "Submarine") {
     setLength(3);
   }
-  if (shipName === "Patrol Boar") {
+  if (shipName === "Patrol Boat") {
     setLength(2);
   }
 
