@@ -29,5 +29,9 @@ function gameBoardFactory() {
     }
   };
 
-  return { getBoard, placeShip };
+  const receiveAttack = function receiveAttack(xCoord, yCoord) {
+    board.set("1,0", "Hit");
+  };
+
+  return { getBoard, placeShip, receiveAttack };
 }
