@@ -30,7 +30,7 @@ function gameBoardFactory() {
   };
 
   const receiveAttack = function receiveAttack(xCoord, yCoord) {
-    board.set("1,0", "Hit");
+    board.set(`${xCoord},${yCoord}`, "Hit");
   };
 
   return { getBoard, placeShip, receiveAttack };
