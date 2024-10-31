@@ -30,6 +30,11 @@ function gameBoardFactory() {
   };
 
   const receiveAttack = function receiveAttack(xCoord, yCoord) {
+    const element = board.get(`${xCoord},${yCoord}`);
+    if (!element) {
+      board.set(`${xCoord},${yCoord}`, "Miss");
+      return;
+    }
     board.set(`${xCoord},${yCoord}`, "Hit");
   };
 
