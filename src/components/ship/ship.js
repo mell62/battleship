@@ -2,6 +2,7 @@ export default shipFactory;
 
 function shipFactory(shipName) {
   let length;
+  const name = shipName;
   let hits = 0;
 
   const setLength = function setLength(num) {
@@ -23,6 +24,10 @@ function shipFactory(shipName) {
     return false;
   };
 
+  const getShipName = function getShipName() {
+    return name;
+  };
+
   if (shipName === "Carrier") {
     setLength(5);
   }
@@ -39,5 +44,5 @@ function shipFactory(shipName) {
     setLength(2);
   }
 
-  return { getLength, hit, isSunk };
+  return { getLength, hit, isSunk, getShipName };
 }
