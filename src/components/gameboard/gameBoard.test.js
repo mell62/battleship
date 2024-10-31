@@ -39,3 +39,9 @@ test("check non-carrier cell horizontal", () => {
   playerBoard.placeShip("Carrier", "0", "0", "horizontal");
   expect(playerBoard.getBoard().get("0,5")).toEqual(undefined);
 });
+
+test("check non-patrol boat cell horizontal", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Patrol Boat", "0", "0", "horizontal");
+  expect(playerBoard.getBoard().get("0,3")).toEqual(undefined);
+});
