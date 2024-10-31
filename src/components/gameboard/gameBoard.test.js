@@ -46,9 +46,16 @@ test("check non-patrol boat cell horizontal", () => {
   expect(playerBoard.getBoard().get("3,0")).toEqual(undefined);
 });
 
-test("receive battleship attack hit", () => {
+test("receive battleship attack hit 1", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Battleship", "0", "0", "horizontal");
   playerBoard.receiveAttack("1", "0");
   expect(playerBoard.getBoard().get("1,0")).toEqual("Hit");
+});
+
+test("receive battleship attack hit 2", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Battleship", "0", "0", "horizontal");
+  playerBoard.receiveAttack("3", "0");
+  expect(playerBoard.getBoard().get("3,0")).toEqual("Hit");
 });
