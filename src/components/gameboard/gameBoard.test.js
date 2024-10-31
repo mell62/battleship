@@ -59,3 +59,10 @@ test("receive battleship attack hit 2", () => {
   playerBoard.receiveAttack("3", "0");
   expect(playerBoard.getBoard().get("3,0")).toEqual("Hit");
 });
+
+test("receive battleship attack miss", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Battleship", "0", "0", "vertical");
+  playerBoard.receiveAttack("3", "0");
+  expect(playerBoard.getBoard().get("3,0")).toEqual("Miss");
+});
