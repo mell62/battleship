@@ -33,3 +33,9 @@ test("place patrol boat vertical", () => {
   expect(playerBoard.getBoard().get("0,0")).toEqual("Patrol Boat");
   expect(playerBoard.getBoard().get("1,0")).toEqual("Patrol Boat");
 });
+
+test("check non-carrier cell horizontal", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Carrier", "0", "0", "horizontal");
+  expect(playerBoard.getBoard().get("0,5")).toEqual(undefined);
+});
