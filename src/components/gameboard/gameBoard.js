@@ -3,6 +3,7 @@ import shipFactory from "../ship/ship";
 
 function gameBoardFactory() {
   let board = new Map();
+  let shipsList = [];
 
   const getBoard = function getBoard() {
     return board;
@@ -10,6 +11,7 @@ function gameBoardFactory() {
 
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
     const ship = shipFactory(shipName);
+    shipsList.push(ship);
     const length = ship.getLength();
     let counter = 0;
     xCoord = Number(xCoord);
@@ -29,18 +31,32 @@ function gameBoardFactory() {
     }
   };
 
+  const getShipObject = function getShipObjectFromName(shipName) {
+    const shipObject = shipsList.filter((ship) => {
+      return ship.getShipName() === shipName;
+    });
+    return shipObject[0];
+  };
+
   const receiveAttack = function receiveAttack(xCoord, yCoord) {
     const element = board.get(`${xCoord},${yCoord}`);
     if (!element) {
       board.set(`${xCoord},${yCoord}`, "Miss");
       return;
     }
-    if (element !== "Miss") {
+    if (element !== "Miss" && element !== "Hit") {
       board.set(`${xCoord},${yCoord}`, "Hit");
+      getShipObject(element).hit();
     }
   };
 
   const ifAllShipsSunk = function ifAllShipsSunk() {
+    let afloatShips = shipsList.filter((ship) => {
+      return ship.isSunk() === false;
+    });
+    if (afloatShips.length) {
+      return false;
+    }
     return true;
   };
 
