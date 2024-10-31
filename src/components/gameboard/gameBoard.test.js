@@ -83,11 +83,19 @@ test("receive battleship attack on hit cell", () => {
   expect(playerBoard.getBoard().get("0,1")).toBe("Hit");
 });
 
-test("verify all 1 ship sunk", () => {
+test("verify all 1 ship have sunk", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Submarine", "2", "1", "vertical");
   playerBoard.receiveAttack("2", "1");
   playerBoard.receiveAttack("2", "2");
   playerBoard.receiveAttack("2", "3");
   expect(playerBoard.ifAllShipsSunk()).toBe(true);
+});
+
+test("verify all 1 ship did not sink", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Submarine", "2", "1", "vertical");
+  playerBoard.receiveAttack("2", "1");
+  playerBoard.receiveAttack("2", "2");
+  expect(playerBoard.ifAllShipsSunk()).toBe(false);
 });
