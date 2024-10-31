@@ -40,5 +40,9 @@ function gameBoardFactory() {
     }
   };
 
-  return { getBoard, placeShip, receiveAttack };
+  const ifAllShipsSunk = function ifAllShipsSunk() {
+    return true;
+  };
+
+  return { getBoard, placeShip, receiveAttack, ifAllShipsSunk };
 }
