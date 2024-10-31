@@ -9,7 +9,7 @@ function shipFactory(shipName) {
   };
 
   const getLength = function getLength() {
-    return this.length;
+    return length;
   };
 
   const hit = function increaseHit() {
