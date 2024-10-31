@@ -1,4 +1,5 @@
 export { gameBoardFactory };
+import shipFactory from "../ship/ship";
 
 function gameBoardFactory() {
   let board = new Map();
@@ -8,21 +9,23 @@ function gameBoardFactory() {
   };
 
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
+    const ship = shipFactory(shipName);
+    const length = ship.getLength();
+    let counter = 0;
     xCoord = Number(xCoord);
     yCoord = Number(yCoord);
-    if (direction === "horizontal") {
+    while (counter < length) {
       board.set(`${xCoord},${yCoord}`, shipName);
-      board.set(`${xCoord},${yCoord + 1}`, shipName);
-      board.set(`${xCoord},${yCoord + 2}`, shipName);
-      board.set(`${xCoord},${yCoord + 3}`, shipName);
-      board.set(`${xCoord},${yCoord + 4}`, shipName);
-    }
-    if (direction === "vertical") {
-      board.set(`${xCoord},${yCoord}`, shipName);
-      board.set(`${xCoord + 1},${yCoord}`, shipName);
-      board.set(`${xCoord + 2},${yCoord}`, shipName);
-      board.set(`${xCoord + 3},${yCoord}`, shipName);
-      board.set(`${xCoord + 4},${yCoord}`, shipName);
+      if (direction === "horizontal") {
+        xCoord += 1;
+        counter += 1;
+        continue;
+      }
+      if (direction === "vertical") {
+        yCoord += 1;
+        counter += 1;
+        continue;
+      }
     }
   };
 
