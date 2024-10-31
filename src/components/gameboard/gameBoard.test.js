@@ -99,3 +99,37 @@ test("verify all 1 ship did not sink", () => {
   playerBoard.receiveAttack("2", "2");
   expect(playerBoard.ifAllShipsSunk()).toBe(false);
 });
+
+test("verify all 3 ships have sunk", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Carrier", "4", "4", "horizontal");
+  playerBoard.placeShip("Submarine", "0", "0", "horizontal");
+  playerBoard.placeShip("Patrol Boat", "9", "0", "vertical");
+  playerBoard.receiveAttack("4", "4");
+  playerBoard.receiveAttack("5", "4");
+  playerBoard.receiveAttack("6", "4");
+  playerBoard.receiveAttack("7", "4");
+  playerBoard.receiveAttack("8", "4");
+  playerBoard.receiveAttack("0", "0");
+  playerBoard.receiveAttack("1", "0");
+  playerBoard.receiveAttack("2", "0");
+  playerBoard.receiveAttack("9", "0");
+  playerBoard.receiveAttack("9", "1");
+  expect(playerBoard.ifAllShipsSunk()).toBe(true);
+});
+
+test("verify all 3 ships have not sunk", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Carrier", "4", "4", "horizontal");
+  playerBoard.placeShip("Submarine", "0", "0", "horizontal");
+  playerBoard.placeShip("Patrol Boat", "9", "0", "vertical");
+  playerBoard.receiveAttack("4", "4");
+  playerBoard.receiveAttack("5", "4");
+  playerBoard.receiveAttack("6", "4");
+  playerBoard.receiveAttack("7", "4");
+  playerBoard.receiveAttack("0", "0");
+  playerBoard.receiveAttack("1", "0");
+  playerBoard.receiveAttack("2", "0");
+  playerBoard.receiveAttack("9", "1");
+  expect(playerBoard.ifAllShipsSunk()).toBe(false);
+});
