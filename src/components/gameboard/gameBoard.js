@@ -35,7 +35,9 @@ function gameBoardFactory() {
       board.set(`${xCoord},${yCoord}`, "Miss");
       return;
     }
-    board.set(`${xCoord},${yCoord}`, "Hit");
+    if (element !== "Miss") {
+      board.set(`${xCoord},${yCoord}`, "Hit");
+    }
   };
 
   return { getBoard, placeShip, receiveAttack };
