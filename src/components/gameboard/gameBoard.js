@@ -21,6 +21,10 @@ function gameBoardFactory() {
       }
       return false;
     }
+    if (yCoord + shipLength - 1 > 9) {
+      return true;
+    }
+    return false;
   };
 
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
