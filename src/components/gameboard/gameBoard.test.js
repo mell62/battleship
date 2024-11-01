@@ -53,6 +53,12 @@ test("verify ship placement on already occupied cells", () => {
   expect(playerBoard.getBoard().get("3,2")).toBe("Patrol Boat");
 });
 
+test("verify horizontal ship placement at edge of grid", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Destroyer", "9", "5", "horizontal");
+  expect(playerBoard.getBoard().get("9,5")).toBe(undefined);
+});
+
 test("receive battleship attack hit 1", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Battleship", "0", "0", "horizontal");
