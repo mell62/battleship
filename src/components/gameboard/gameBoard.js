@@ -27,6 +27,39 @@ function gameBoardFactory() {
     return false;
   };
 
+  const ifNextToShip = function ifNextToShip(
+    shipLength,
+    xCoord,
+    yCoord,
+    direction,
+  ) {
+    if (shipLength === 0) {
+      return false;
+    }
+    let upElement = `${xCoord},${yCoord - 1}`;
+    let rightElement = `${xCoord + 1},${yCoord}`;
+    let downElement = `${xCoord},${yCoord + 1}`;
+    let leftElement = `${xCoord - 1},${yCoord}`;
+    const ships = [
+      "Carrier",
+      "Battleship",
+      "Destroyer",
+      "Submarine",
+      "Patrol Boat",
+    ];
+    if (direction === "horizontal") {
+      if (
+        ships.includes(board.get(upElement)) ||
+        ships.includes(board.get(rightElement)) ||
+        ships.includes(board.get(downElement)) ||
+        ships.includes(board.get(leftElement))
+      ) {
+        return true;
+      }
+      return ifNextToShip(shipLength - 1, xCoord + 1, yCoord, direction);
+    }
+  };
+
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
     const ship = shipFactory(shipName);
     shipsList.push(ship);
@@ -36,7 +69,8 @@ function gameBoardFactory() {
     yCoord = Number(yCoord);
     if (
       !board.get(`${xCoord},${yCoord}`) &&
-      !ifExceedBoard(length, xCoord, yCoord, direction)
+      !ifExceedBoard(length, xCoord, yCoord, direction) &&
+      !ifNextToShip(length, xCoord, yCoord, direction)
     ) {
       while (counter < length) {
         board.set(`${xCoord},${yCoord}`, shipName);
