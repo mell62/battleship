@@ -9,6 +9,20 @@ function gameBoardFactory() {
     return board;
   };
 
+  const ifExceedBoard = function ifExceedBoard(
+    shipLength,
+    xCoord,
+    yCoord,
+    direction,
+  ) {
+    if (direction === "horizontal") {
+      if (xCoord + shipLength - 1 > 9) {
+        return true;
+      }
+      return false;
+    }
+  };
+
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
     const ship = shipFactory(shipName);
     shipsList.push(ship);
@@ -16,7 +30,10 @@ function gameBoardFactory() {
     let counter = 0;
     xCoord = Number(xCoord);
     yCoord = Number(yCoord);
-    if (!board.get(`${xCoord},${yCoord}`)) {
+    if (
+      !board.get(`${xCoord},${yCoord}`) &&
+      !ifExceedBoard(length, xCoord, yCoord, direction)
+    ) {
       while (counter < length) {
         board.set(`${xCoord},${yCoord}`, shipName);
         if (direction === "horizontal") {
