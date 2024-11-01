@@ -58,6 +58,15 @@ function gameBoardFactory() {
       }
       return ifNextToShip(shipLength - 1, xCoord + 1, yCoord, direction);
     }
+    if (
+      ships.includes(board.get(upElement)) ||
+      ships.includes(board.get(rightElement)) ||
+      ships.includes(board.get(downElement)) ||
+      ships.includes(board.get(leftElement))
+    ) {
+      return true;
+    }
+    return ifNextToShip(shipLength - 1, xCoord, yCoord + 1, direction);
   };
 
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
