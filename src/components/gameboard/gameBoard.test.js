@@ -65,6 +65,20 @@ test("verify vertical ship placement at edge of grid", () => {
   expect(playerBoard.getBoard().get("3,9")).toBe(undefined);
 });
 
+test("verify horizontal ship placement next to another ship 1", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Submarine", "2", "2", "vertical");
+  playerBoard.placeShip("Carrier", "0", "5", "horizontal");
+  expect(playerBoard.getBoard().get("0,5")).toBe(undefined);
+});
+
+test("verify horizontal ship placement next to another ship 2", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Submarine", "2", "2", "horizontal");
+  playerBoard.placeShip("Carrier", "3", "3", "horizontal");
+  expect(playerBoard.getBoard().get("4,3")).toBe(undefined);
+});
+
 test("receive battleship attack hit 1", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Battleship", "0", "0", "horizontal");
