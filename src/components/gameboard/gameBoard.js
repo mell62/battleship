@@ -16,17 +16,19 @@ function gameBoardFactory() {
     let counter = 0;
     xCoord = Number(xCoord);
     yCoord = Number(yCoord);
-    while (counter < length) {
-      board.set(`${xCoord},${yCoord}`, shipName);
-      if (direction === "horizontal") {
-        xCoord += 1;
-        counter += 1;
-        continue;
-      }
-      if (direction === "vertical") {
-        yCoord += 1;
-        counter += 1;
-        continue;
+    if (!board.get(`${xCoord},${yCoord}`)) {
+      while (counter < length) {
+        board.set(`${xCoord},${yCoord}`, shipName);
+        if (direction === "horizontal") {
+          xCoord += 1;
+          counter += 1;
+          continue;
+        }
+        if (direction === "vertical") {
+          yCoord += 1;
+          counter += 1;
+          continue;
+        }
       }
     }
   };
