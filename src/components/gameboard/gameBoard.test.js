@@ -53,16 +53,28 @@ test("verify ship placement on already occupied cells", () => {
   expect(playerBoard.getBoard().get("3,2")).toBe("Patrol Boat");
 });
 
-test("verify horizontal ship placement at edge of grid", () => {
+test("verify horizontal ship placement at edge of grid 1", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Destroyer", "9", "5", "horizontal");
   expect(playerBoard.getBoard().get("9,5")).toBe(undefined);
 });
 
-test("verify vertical ship placement at edge of grid", () => {
+test("verify horizontal ship placement at edge of grid 2", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Carrier", "6", "4", "horizontal");
+  expect(playerBoard.getBoard().get("8,4")).toBe(undefined);
+});
+
+test("verify vertical ship placement at edge of grid 1", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Destroyer", "3", "8", "vertical");
   expect(playerBoard.getBoard().get("3,9")).toBe(undefined);
+});
+
+test("verify vertical ship placement at edge of grid 2", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Battleship", "7", "7", "vertical");
+  expect(playerBoard.getBoard().get("7,9")).toBe(undefined);
 });
 
 test("verify horizontal ship placement next to another ship 1", () => {
