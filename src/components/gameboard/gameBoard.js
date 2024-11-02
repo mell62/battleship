@@ -1,5 +1,5 @@
 export { gameBoardFactory };
-import shipFactory from "../ship/ship";
+import shipFactory from "../ship";
 
 function gameBoardFactory() {
   let board = new Map();
