@@ -1,0 +1,19 @@
+.boards-container {
+  display: flex;
+  gap: 8rem;
+}
+
+.gameboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.coord {
+  border: 0.1rem solid black;
+  width: 2rem;
+  height: 2rem;
+}
