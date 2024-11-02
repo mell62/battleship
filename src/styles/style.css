@@ -5,18 +5,12 @@
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(10, 1rem);
-  grid-template-rows: repeat(10, 1rem);
-}
-
-.player-board {
-  display: grid;
-  grid-template-columns: repeat(10, 1rem);
-  grid-template-rows: repeat(10, 1rem);
+  grid-template-columns: repeat(10, 2rem);
+  grid-template-rows: repeat(10, 2rem);
 }
 
 .coord {
   border: 0.1rem solid black;
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
