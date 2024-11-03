@@ -41,13 +41,23 @@ function renderComputerBoard() {
 
   shipCoords.forEach((coord) => {
     if (coord.direction === "horizontal") {
+      const coordBoard = `${coord.xCoord},${coord.yCoord}`;
       const coordClass = `${coord.xCoord}-${coord.yCoord}`;
       const coordEle = findCoordEle(computerBoardCoords, coordClass);
+      if (gameBoard.getBoard().get(coordBoard) === "Hit") {
+        coordEle.style.backgroundColor = "red";
+        return;
+      }
       coordEle.textContent = "H";
       return;
     }
+    const coordBoard = `${coord.xCoord},${coord.yCoord}`;
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
+    if (gameBoard.getBoard().get(coordBoard) === "Hit") {
+      coordEle.style.backgroundColor = "red";
+      return;
+    }
     coordEle.textContent = "V";
   });
 }
