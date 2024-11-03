@@ -1,4 +1,6 @@
-import { playerFactory } from "./player";
+import { playerFactory } from "../barrel";
+
+export { getPlayerBoard, getComputerBoard };
 
 const player = playerFactory();
 const computer = playerFactory();
@@ -14,3 +16,11 @@ computer.board.placeShip("Battleship", "6", "3", "vertical");
 computer.board.placeShip("Destroyer", "0", "8", "horizontal");
 computer.board.placeShip("Submarine", "9", "0", "vertical");
 computer.board.placeShip("Patrol Boat", "7", "8", "horizontal");
+
+function getPlayerBoard() {
+  return player.board;
+}
+
+function getComputerBoard() {
+  return computer.board;
+}
