@@ -21,12 +21,13 @@ function renderPlayerBoard() {
       const coordEle = playerBoardCoords.find((playerCoord) => {
         return playerCoord.classList.contains(coordClass);
       });
-      coordEle.textContent = "Hibro";
+      coordEle.textContent = "H";
+      return;
     }
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = playerBoardCoords.find((playerCoord) => {
       return playerCoord.classList.contains(coordClass);
     });
-    coordEle.textContent = "test";
+    coordEle.textContent = "V";
   });
 }
