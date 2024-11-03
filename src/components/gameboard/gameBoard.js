@@ -1,9 +1,10 @@
 export { gameBoardFactory };
-import shipFactory from "../ship";
+import { shipFactory } from "../ship";
 
 function gameBoardFactory() {
   let board = new Map();
   let shipsList = [];
+  let shipsPlacement = [];
 
   const getBoard = function getBoard() {
     return board;
@@ -69,6 +70,18 @@ function gameBoardFactory() {
     return ifNextToShip(shipLength - 1, xCoord, yCoord + 1, direction);
   };
 
+  const recordPlacement = function recordShipsPlacement(
+    xCoord,
+    yCoord,
+    direction,
+  ) {
+    shipsPlacement.push({ xCoord, yCoord, direction });
+  };
+
+  const getShipsCoords = function getShipsCoords() {
+    return shipsPlacement;
+  };
+
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
     const ship = shipFactory(shipName);
     shipsList.push(ship);
@@ -94,6 +107,7 @@ function gameBoardFactory() {
           continue;
         }
       }
+      recordPlacement(xCoord - 1, yCoord - 1, direction);
     }
   };
 
@@ -126,5 +140,5 @@ function gameBoardFactory() {
     return true;
   };
 
-  return { getBoard, placeShip, receiveAttack, ifAllShipsSunk };
+  return { getBoard, placeShip, receiveAttack, ifAllShipsSunk, getShipsCoords };
 }
