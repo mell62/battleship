@@ -1,4 +1,4 @@
-import { gameBoardFactory } from "./gameboard/gameBoard";
+import { gameBoardFactory } from "../barrel";
 
 export { playerFactory };
 

@@ -1,4 +1,4 @@
-export default shipFactory;
+export { shipFactory };
 
 function shipFactory(shipName) {
   let length;
