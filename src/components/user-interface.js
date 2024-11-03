@@ -25,11 +25,7 @@ function renderPlayerBoard() {
   shipCoords.forEach((coord) => {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
-    if (coord.direction === "horizontal") {
-      coordEle.textContent = "H";
-      return;
-    }
-    coordEle.textContent = "V";
+    coordEle.textContent = "O";
   });
 }
 
@@ -45,10 +41,6 @@ function renderComputerBoard() {
       coordEle.style.backgroundColor = "red";
       return;
     }
-    if (coord.direction === "horizontal") {
-      coordEle.textContent = "H";
-      return;
-    }
-    coordEle.textContent = "V";
+    coordEle.textContent = "O";
   });
 }
