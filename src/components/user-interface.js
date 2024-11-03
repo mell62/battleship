@@ -1,6 +1,6 @@
-import { getPlayerBoard } from "../barrel";
+import { getPlayerBoard, getComputerBoard } from "../barrel";
 
-export { renderPlayerBoard };
+export { renderPlayerBoard, renderComputerBoard };
 
 const playerBoardInterface = document.querySelector(".player-board");
 const playerBoardCoords = Array.from(
@@ -31,6 +31,23 @@ function renderPlayerBoard() {
     }
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
+    coordEle.textContent = "V";
+  });
+}
+
+function renderComputerBoard() {
+  const gameBoard = getComputerBoard();
+  const shipCoords = gameBoard.getShipsCoords();
+
+  shipCoords.forEach((coord) => {
+    if (coord.direction === "horizontal") {
+      const coordClass = `${coord.xCoord}-${coord.yCoord}`;
+      const coordEle = findCoordEle(computerBoardCoords, coordClass);
+      coordEle.textContent = "H";
+      return;
+    }
+    const coordClass = `${coord.xCoord}-${coord.yCoord}`;
+    const coordEle = findCoordEle(computerBoardCoords, coordClass);
     coordEle.textContent = "V";
   });
 }
