@@ -99,15 +99,16 @@ function gameBoardFactory() {
         if (direction === "horizontal") {
           xCoord += 1;
           counter += 1;
+          recordPlacement(xCoord - 1, yCoord, direction);
           continue;
         }
         if (direction === "vertical") {
           yCoord += 1;
           counter += 1;
+          recordPlacement(xCoord, yCoord - 1, direction);
           continue;
         }
       }
-      recordPlacement(xCoord - 1, yCoord - 1, direction);
     }
   };
 
