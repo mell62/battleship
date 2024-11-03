@@ -23,14 +23,12 @@ function renderPlayerBoard() {
   const shipCoords = gameBoard.getShipsCoords();
 
   shipCoords.forEach((coord) => {
+    const coordClass = `${coord.xCoord}-${coord.yCoord}`;
+    const coordEle = findCoordEle(playerBoardCoords, coordClass);
     if (coord.direction === "horizontal") {
-      const coordClass = `${coord.xCoord}-${coord.yCoord}`;
-      const coordEle = findCoordEle(playerBoardCoords, coordClass);
       coordEle.textContent = "H";
       return;
     }
-    const coordClass = `${coord.xCoord}-${coord.yCoord}`;
-    const coordEle = findCoordEle(playerBoardCoords, coordClass);
     coordEle.textContent = "V";
   });
 }
