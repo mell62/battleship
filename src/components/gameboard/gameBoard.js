@@ -5,6 +5,7 @@ function gameBoardFactory() {
   let board = new Map();
   let shipsList = [];
   let shipsPlacement = [];
+  let missedCoords = [];
 
   const getBoard = function getBoard() {
     return board;
@@ -82,6 +83,10 @@ function gameBoardFactory() {
     return shipsPlacement;
   };
 
+  const getMissedCoords = function getMissedCoords() {
+    return missedCoords;
+  };
+
   const placeShip = function placeShip(shipName, xCoord, yCoord, direction) {
     const ship = shipFactory(shipName);
     shipsList.push(ship);
@@ -123,6 +128,7 @@ function gameBoardFactory() {
     const element = board.get(`${xCoord},${yCoord}`);
     if (!element) {
       board.set(`${xCoord},${yCoord}`, "Miss");
+      missedCoords.push({ xCoord, yCoord });
       return;
     }
     if (element !== "Miss" && element !== "Hit") {
@@ -141,5 +147,12 @@ function gameBoardFactory() {
     return true;
   };
 
-  return { getBoard, placeShip, receiveAttack, ifAllShipsSunk, getShipsCoords };
+  return {
+    getBoard,
+    placeShip,
+    receiveAttack,
+    ifAllShipsSunk,
+    getShipsCoords,
+    getMissedCoords,
+  };
 }
