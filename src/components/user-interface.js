@@ -21,11 +21,23 @@ const findCoordEle = function findCoordEle(coordsArray, coordClass) {
 function renderPlayerBoard() {
   const gameBoard = getPlayerBoard();
   const shipCoords = gameBoard.getShipsCoords();
+  const missedCoords = gameBoard.getMissedCoords();
 
   shipCoords.forEach((coord) => {
+    const coordBoard = `${coord.xCoord},${coord.yCoord}`;
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
     coordEle.textContent = "O";
+    if (gameBoard.getBoard().get(coordBoard) === "Hit") {
+      coordEle.style.backgroundColor = "red";
+      return;
+    }
+  });
+
+  missedCoords.forEach((coord) => {
+    const coordClass = `${coord.xCoord}-${coord.yCoord}`;
+    const coordEle = findCoordEle(playerBoardCoords, coordClass);
+    coordEle.style.backgroundColor = "black";
   });
 }
 
