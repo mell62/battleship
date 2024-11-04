@@ -1,4 +1,9 @@
-import { playerFactory, renderComputerBoard } from "../barrel";
+import {
+  playerFactory,
+  renderComputerBoard,
+  doComputerAttack,
+  renderPlayerBoard,
+} from "../barrel";
 
 export { getPlayerBoard, getComputerBoard };
 
@@ -40,5 +45,7 @@ computerBoard.addEventListener("click", (event) => {
   if (event.target.classList.contains("computer-coord")) {
     attackOnCoord(event.target);
     renderComputerBoard();
+    doComputerAttack(player.board);
+    renderPlayerBoard();
   }
 });
