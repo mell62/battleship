@@ -42,6 +42,7 @@ const attackOnCoord = function attackOnCoord(coordEle) {
 };
 
 computerBoard.addEventListener("click", (event) => {
+  if (computer.board.ifAllShipsSunk() || player.board.ifAllShipsSunk()) return;
   if (event.target.classList.contains("computer-coord")) {
     attackOnCoord(event.target);
     renderComputerBoard();
