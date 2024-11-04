@@ -32,6 +32,7 @@ function renderPlayerBoard() {
 function renderComputerBoard() {
   const gameBoard = getComputerBoard();
   const shipCoords = gameBoard.getShipsCoords();
+  const missedCoords = gameBoard.getMissedCoords();
 
   shipCoords.forEach((coord) => {
     const coordBoard = `${coord.xCoord},${coord.yCoord}`;
@@ -42,5 +43,11 @@ function renderComputerBoard() {
       return;
     }
     coordEle.textContent = "O";
+  });
+
+  missedCoords.forEach((coord) => {
+    const coordClass = `${coord.xCoord}-${coord.yCoord}`;
+    const coordEle = findCoordEle(computerBoardCoords, coordClass);
+    coordEle.style.backgroundColor = "black";
   });
 }
