@@ -1,6 +1,6 @@
 import { gameBoardFactory } from "../barrel";
 
-export { playerFactory, doComputerAttack, doPlayerAttack };
+export { playerFactory, doAttack };
 
 const classCoordPattern = /^\d-\d$/;
 
@@ -29,4 +29,9 @@ const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
   const xCoord = classCoord.slice(0, 1);
   const yCoord = classCoord.slice(2, 3);
   gameBoard.receiveAttack(xCoord, yCoord);
+};
+
+const doAttack = function doAttack(playerBoard, computerBoard, coordEle) {
+  doPlayerAttack(computerBoard, coordEle);
+  doComputerAttack(playerBoard);
 };

@@ -1,8 +1,7 @@
 import {
   playerFactory,
   renderComputerBoard,
-  doComputerAttack,
-  doPlayerAttack,
+  doAttack,
   renderPlayerBoard,
 } from "../barrel";
 
@@ -36,9 +35,9 @@ function getComputerBoard() {
 computerBoard.addEventListener("click", (event) => {
   if (computer.board.ifAllShipsSunk() || player.board.ifAllShipsSunk()) return;
   if (event.target.classList.contains("computer-coord")) {
-    doPlayerAttack(computer.board, event.target);
+    doAttack(player.board, computer.board, event.target);
     renderComputerBoard();
-    doComputerAttack(player.board);
     renderPlayerBoard();
+    console.log(event.target);
   }
 });

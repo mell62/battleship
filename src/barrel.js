@@ -1,8 +1,4 @@
-export {
-  playerFactory,
-  doComputerAttack,
-  doPlayerAttack,
-} from "./components/player";
+export { playerFactory, doAttack } from "./components/player";
 export { shipFactory } from "./components/ship";
 
 export { gameBoardFactory } from "./components/gameboard/gameBoard";
