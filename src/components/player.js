@@ -28,10 +28,19 @@ const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
   const classCoord = classes.find((coord) => classCoordPattern.test(coord));
   const xCoord = classCoord.slice(0, 1);
   const yCoord = classCoord.slice(2, 3);
+  if (
+    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
+    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
+  ) {
+    // To avoid already attacked cells to be attacked again
+    return false;
+  }
   gameBoard.receiveAttack(xCoord, yCoord);
+  return true;
 };
 
 const doAttack = function doAttack(playerBoard, computerBoard, coordEle) {
-  doPlayerAttack(computerBoard, coordEle);
-  doComputerAttack(playerBoard);
+  if (doPlayerAttack(computerBoard, coordEle)) {
+    doComputerAttack(playerBoard);
+  }
 };
