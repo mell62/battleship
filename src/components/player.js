@@ -4,6 +4,7 @@ export { playerFactory, doAttack };
 
 const classCoordPattern = /^\d-\d$/;
 let lastHit = null;
+let sunkShips = 0;
 
 function playerFactory() {
   const board = gameBoardFactory();
@@ -47,7 +48,6 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
   const xCoord = Math.floor(Math.random() * 10).toString();
   const yCoord = Math.floor(Math.random() * 10).toString();
   let hitCounter = gameBoard.getHits();
-  let sunkShips = gameBoard.getNumberOfSunkShips();
   if (
     gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
     gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
@@ -60,6 +60,8 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
     attackRandomAdjacentCoord(gameBoard, lastHit[0], lastHit[1]);
     return;
   }
+  lastHit = null;
+  sunkShips = gameBoard.getNumberOfSunkShips();
   gameBoard.receiveAttack(xCoord, yCoord);
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [xCoord, yCoord];
