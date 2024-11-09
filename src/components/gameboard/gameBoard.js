@@ -6,6 +6,7 @@ function gameBoardFactory() {
   let shipsList = [];
   let shipsPlacement = [];
   let missedCoords = [];
+  let hits = 0;
 
   const getBoard = function getBoard() {
     return board;
@@ -134,6 +135,7 @@ function gameBoardFactory() {
     if (element !== "Miss" && element !== "Hit") {
       board.set(`${xCoord},${yCoord}`, "Hit");
       getShipObject(element).hit();
+      hits += 1;
     }
   };
 
@@ -147,6 +149,17 @@ function gameBoardFactory() {
     return true;
   };
 
+  const getNumberOfSunkShips = function getNumberOfSunkShips() {
+    let sunkShips = shipsList.filter((ship) => {
+      return ship.isSunk() === true;
+    });
+    return sunkShips.length;
+  };
+
+  const getHits = function getHits() {
+    return hits;
+  };
+
   return {
     getBoard,
     placeShip,
@@ -154,5 +167,7 @@ function gameBoardFactory() {
     ifAllShipsSunk,
     getShipsCoords,
     getMissedCoords,
+    getHits,
+    getNumberOfSunkShips,
   };
 }
