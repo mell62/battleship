@@ -38,6 +38,5 @@ computerBoard.addEventListener("click", (event) => {
     doAttack(player.board, computer.board, event.target);
     renderComputerBoard();
     renderPlayerBoard();
-    console.log(event.target);
   }
 });
