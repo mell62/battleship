@@ -5,11 +5,112 @@ export { playerFactory, doAttack };
 const classCoordPattern = /^\d-\d$/;
 let lastHit = null;
 let sunkShips = 0;
+let attackDirection = null;
+let initialHitCoord = null;
 
 function playerFactory() {
   const board = gameBoardFactory();
   return { board };
 }
+
+const attackAppropriateDirection = function attackAppropriateDirection(
+  gameBoard,
+  xCoord,
+  yCoord,
+) {
+  let hitCounter = gameBoard.getHits();
+  if (attackDirection === "horizontalRight") {
+    attackHorizontalRight(gameBoard, xCoord, yCoord);
+    if (hitCounter !== gameBoard.getHits()) {
+      lastHit = [xCoord + 1, yCoord];
+    }
+  }
+  if (attackDirection === "horizontalLeft") {
+    attackHorizontalLeft(gameBoard, xCoord, yCoord);
+    if (hitCounter !== gameBoard.getHits()) {
+      lastHit = [xCoord - 1, yCoord];
+    }
+  }
+  if (attackDirection === "verticalDown") {
+    attackVerticalDown(gameBoard, xCoord, yCoord);
+    if (hitCounter !== gameBoard.getHits()) {
+      lastHit = [xCoord, yCoord + 1];
+    }
+  }
+  if (attackDirection === "verticalUp") {
+    attackVerticalUp(gameBoard, xCoord, yCoord);
+    if (hitCounter !== gameBoard.getHits()) {
+      lastHit = [xCoord, yCoord - 1];
+    }
+  }
+};
+
+const attackHorizontalRight = function attackHorizontalRight(
+  gameBoard,
+  xCoord,
+  yCoord,
+) {
+  if (
+    gameBoard.getBoard().get(`${Number(xCoord) + 1},${Number(yCoord)}`) ===
+    "Miss"
+  ) {
+    attackDirection = "horizontalLeft";
+    attackHorizontalLeft(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+  }
+  gameBoard.receiveAttack(Number(xCoord) + 1, Number(yCoord));
+  // console.log(Number(xCoord) + 1, Number(yCoord));
+  return;
+};
+
+const attackHorizontalLeft = function attackHorizontalLeft(
+  gameBoard,
+  xCoord,
+  yCoord,
+) {
+  if (
+    gameBoard.getBoard().get(`${Number(xCoord) - 1},${Number(yCoord)}`) ===
+    "Miss"
+  ) {
+    attackDirection = "horizontalRight";
+    attackHorizontalRight(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+  }
+  gameBoard.receiveAttack(Number(xCoord) - 1, Number(yCoord));
+  // console.log(Number(xCoord) - 1, Number(yCoord));
+
+  return;
+};
+
+const attackVerticalDown = function attackVerticalDown(
+  gameBoard,
+  xCoord,
+  yCoord,
+) {
+  if (
+    gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) + 1}`) ===
+    "Miss"
+  ) {
+    attackDirection = "verticalUp";
+    attackVerticalUp(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+  }
+  gameBoard.receiveAttack(Number(xCoord), Number(yCoord) + 1);
+  // console.log(Number(xCoord), Number(yCoord) + 1);
+
+  return;
+};
+
+const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
+  if (
+    gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) - 1}`) ===
+    "Miss"
+  ) {
+    attackDirection = "verticalDown";
+    attackVerticalDown(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+  }
+  gameBoard.receiveAttack(Number(xCoord), Number(yCoord) - 1);
+  // console.log(Number(xCoord), Number(yCoord) - 1);
+
+  return;
+};
 
 const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
   gameBoard,
@@ -40,7 +141,32 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
   }
   gameBoard.receiveAttack(...attackingCoords);
   if (hitCounter !== gameBoard.getHits()) {
+    initialHitCoord = lastHit;
     lastHit = attackingCoords;
+    if (
+      JSON.stringify(attackingCoords) ===
+      JSON.stringify([Number(xCoord) + 1, Number(yCoord)])
+    ) {
+      attackDirection = "horizontalRight";
+    }
+    if (
+      JSON.stringify(attackingCoords) ===
+      JSON.stringify([Number(xCoord) - 1, Number(yCoord)])
+    ) {
+      attackDirection = "horizontalLeft";
+    }
+    if (
+      JSON.stringify(attackingCoords) ===
+      JSON.stringify([Number(xCoord), Number(yCoord) + 1])
+    ) {
+      attackDirection = "verticalDown";
+    }
+    if (
+      JSON.stringify(attackingCoords) ===
+      JSON.stringify([Number(xCoord), Number(yCoord) - 1])
+    ) {
+      attackDirection = "verticalUp";
+    }
   }
 };
 
@@ -56,11 +182,20 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
     doComputerAttack(gameBoard);
     return;
   }
+  if (
+    lastHit &&
+    attackDirection &&
+    sunkShips === gameBoard.getNumberOfSunkShips()
+  ) {
+    attackAppropriateDirection(gameBoard, lastHit[0], lastHit[1]);
+    return;
+  }
   if (lastHit && sunkShips === gameBoard.getNumberOfSunkShips()) {
     attackRandomAdjacentCoord(gameBoard, lastHit[0], lastHit[1]);
     return;
   }
   lastHit = null;
+  attackDirection = null;
   sunkShips = gameBoard.getNumberOfSunkShips();
   gameBoard.receiveAttack(xCoord, yCoord);
   if (hitCounter !== gameBoard.getHits()) {
