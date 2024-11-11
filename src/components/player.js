@@ -18,30 +18,17 @@ const attackAppropriateDirection = function attackAppropriateDirection(
   xCoord,
   yCoord,
 ) {
-  let hitCounter = gameBoard.getHits();
   if (attackDirection === "horizontalRight") {
     attackHorizontalRight(gameBoard, xCoord, yCoord);
-    if (hitCounter !== gameBoard.getHits()) {
-      lastHit = [xCoord + 1, yCoord];
-    }
   }
   if (attackDirection === "horizontalLeft") {
     attackHorizontalLeft(gameBoard, xCoord, yCoord);
-    if (hitCounter !== gameBoard.getHits()) {
-      lastHit = [xCoord - 1, yCoord];
-    }
   }
   if (attackDirection === "verticalDown") {
     attackVerticalDown(gameBoard, xCoord, yCoord);
-    if (hitCounter !== gameBoard.getHits()) {
-      lastHit = [xCoord, yCoord + 1];
-    }
   }
   if (attackDirection === "verticalUp") {
     attackVerticalUp(gameBoard, xCoord, yCoord);
-    if (hitCounter !== gameBoard.getHits()) {
-      lastHit = [xCoord, yCoord - 1];
-    }
   }
 };
 
@@ -50,15 +37,35 @@ const attackHorizontalRight = function attackHorizontalRight(
   xCoord,
   yCoord,
 ) {
+  let hitCounter = gameBoard.getHits();
+  if (!gameBoard.getBoard().get(`${Number(xCoord) + 1},${Number(yCoord)}`)) {
+    //to avoid attacking outside board
+    attackDirection = "horizontalLeft";
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
+  }
   if (
     gameBoard.getBoard().get(`${Number(xCoord) + 1},${Number(yCoord)}`) ===
     "Miss"
   ) {
+    gameBoard.receiveAttack(Number(xCoord) + 1, Number(yCoord));
     attackDirection = "horizontalLeft";
-    attackHorizontalLeft(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
   }
   gameBoard.receiveAttack(Number(xCoord) + 1, Number(yCoord));
-  // console.log(Number(xCoord) + 1, Number(yCoord));
+  if (hitCounter !== gameBoard.getHits()) {
+    lastHit = [Number(xCoord) + 1, Number(yCoord)];
+    hitCounter = gameBoard.getHits();
+  }
   return;
 };
 
@@ -67,15 +74,35 @@ const attackHorizontalLeft = function attackHorizontalLeft(
   xCoord,
   yCoord,
 ) {
+  let hitCounter = gameBoard.getHits();
+  if (!gameBoard.getBoard().get(`${Number(xCoord) - 1},${Number(yCoord)}`)) {
+    //to avoid attacking outside board
+    attackDirection = "horizontalRight";
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
+  }
   if (
     gameBoard.getBoard().get(`${Number(xCoord) - 1},${Number(yCoord)}`) ===
     "Miss"
   ) {
+    gameBoard.receiveAttack(Number(xCoord) - 1, Number(yCoord));
     attackDirection = "horizontalRight";
-    attackHorizontalRight(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
   }
   gameBoard.receiveAttack(Number(xCoord) - 1, Number(yCoord));
-  // console.log(Number(xCoord) - 1, Number(yCoord));
+  if (hitCounter !== gameBoard.getHits()) {
+    lastHit = [Number(xCoord) - 1, Number(yCoord)];
+    hitCounter = gameBoard.getHits();
+  }
 
   return;
 };
@@ -85,30 +112,69 @@ const attackVerticalDown = function attackVerticalDown(
   xCoord,
   yCoord,
 ) {
+  let hitCounter = gameBoard.getHits();
+  if (!gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) + 1}`)) {
+    //to avoid attacking outside board
+    attackDirection = "verticalUp";
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
+  }
   if (
     gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) + 1}`) ===
     "Miss"
   ) {
+    gameBoard.receiveAttack(Number(xCoord), Number(yCoord) + 1);
     attackDirection = "verticalUp";
-    attackVerticalUp(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
   }
   gameBoard.receiveAttack(Number(xCoord), Number(yCoord) + 1);
-  // console.log(Number(xCoord), Number(yCoord) + 1);
+  if (hitCounter !== gameBoard.getHits()) {
+    lastHit = [Number(xCoord), Number(yCoord) + 1];
+    hitCounter = gameBoard.getHits();
+  }
 
   return;
 };
 
 const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
+  let hitCounter = gameBoard.getHits();
+  if (!gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) - 1}`)) {
+    //to avoid attacking outside board
+    attackDirection = "verticalDown";
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
+  }
   if (
     gameBoard.getBoard().get(`${Number(xCoord)},${Number(yCoord) - 1}`) ===
     "Miss"
   ) {
+    gameBoard.receiveAttack(Number(xCoord), Number(yCoord) - 1);
     attackDirection = "verticalDown";
-    attackVerticalDown(gameBoard, initialHitCoord[0], initialHitCoord[1]);
+    attackAppropriateDirection(
+      gameBoard,
+      initialHitCoord[0],
+      initialHitCoord[1],
+    );
+    return;
   }
   gameBoard.receiveAttack(Number(xCoord), Number(yCoord) - 1);
-  // console.log(Number(xCoord), Number(yCoord) - 1);
-
+  if (hitCounter !== gameBoard.getHits()) {
+    lastHit = [Number(xCoord), Number(yCoord) - 1];
+    hitCounter = gameBoard.getHits();
+  }
   return;
 };
 
@@ -143,6 +209,7 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
   if (hitCounter !== gameBoard.getHits()) {
     initialHitCoord = lastHit;
     lastHit = attackingCoords;
+    hitCounter = gameBoard.getHits();
     if (
       JSON.stringify(attackingCoords) ===
       JSON.stringify([Number(xCoord) + 1, Number(yCoord)])
