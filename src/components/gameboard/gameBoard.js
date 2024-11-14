@@ -76,8 +76,9 @@ function gameBoardFactory() {
     xCoord,
     yCoord,
     direction,
+    shipName,
   ) {
-    shipsPlacement.push({ xCoord, yCoord, direction });
+    shipsPlacement.push({ xCoord, yCoord, direction, shipName });
   };
 
   const getShipsCoords = function getShipsCoords() {
@@ -105,13 +106,13 @@ function gameBoardFactory() {
         if (direction === "horizontal") {
           xCoord += 1;
           counter += 1;
-          recordPlacement(xCoord - 1, yCoord, direction);
+          recordPlacement(xCoord - 1, yCoord, direction, ship.getShipName());
           continue;
         }
         if (direction === "vertical") {
           yCoord += 1;
           counter += 1;
-          recordPlacement(xCoord, yCoord - 1, direction);
+          recordPlacement(xCoord, yCoord - 1, direction, ship.getShipName());
           continue;
         }
       }
@@ -119,10 +120,53 @@ function gameBoardFactory() {
   };
 
   const getShipObject = function getShipObjectFromName(shipName) {
-    const shipObject = shipsList.filter((ship) => {
-      return ship.getShipName() === shipName;
-    });
+    const shipObject = shipsList.filter(
+      (ship) => ship.getShipName() === shipName,
+    );
     return shipObject[0];
+  };
+
+  const markAdjacentMissIfSunk = function markAdjacentMissIfSunk(board, ship) {
+    if (ship.isSunk()) {
+      const shipPlacement = getShipsCoords().find(
+        (obj) => obj.shipName === ship.getShipName(),
+      );
+      let shipLength = ship.getLength();
+      let currentXCoord = shipPlacement.xCoord;
+      let currentYCoord = shipPlacement.yCoord;
+      while (shipLength > 0) {
+        if (shipPlacement.direction === "horizontal") {
+          const targetCoords = [
+            [currentXCoord + 1, currentYCoord],
+            [currentXCoord - 1, currentYCoord],
+            [currentXCoord, currentYCoord + 1],
+            [currentXCoord, currentYCoord - 1],
+          ];
+          targetCoords.forEach((coord) => {
+            if (!board.get(`${coord[0]},${coord[1]}`)) {
+              board.set(`${coord[0]},${coord[1]}`, "Miss");
+            }
+          });
+          shipLength -= 1;
+          currentXCoord += 1;
+          continue;
+        }
+        const targetCoords = [
+          [currentXCoord + 1, currentYCoord],
+          [currentXCoord - 1, currentYCoord],
+          [currentXCoord, currentYCoord + 1],
+          [currentXCoord, currentYCoord - 1],
+        ];
+        targetCoords.forEach((coord) => {
+          if (!board.get(`${coord[0]},${coord[1]}`)) {
+            board.set(`${coord[0]},${coord[1]}`, "Miss");
+          }
+        });
+        shipLength -= 1;
+        currentYCoord += 1;
+        continue;
+      }
+    }
   };
 
   const receiveAttack = function receiveAttack(xCoord, yCoord) {
@@ -136,6 +180,7 @@ function gameBoardFactory() {
       board.set(`${xCoord},${yCoord}`, "Hit");
       getShipObject(element).hit();
       hits += 1;
+      markAdjacentMissIfSunk(board, getShipObject(element));
     }
   };
 
