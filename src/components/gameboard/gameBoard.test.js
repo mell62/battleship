@@ -193,7 +193,7 @@ test("verify all 3 ships have not sunk", () => {
   expect(playerBoard.ifAllShipsSunk()).toBe(false);
 });
 
-test("verify locations adjacent to sunk ship is marked miss", () => {
+test("verify locations adjacent to sunk ship is marked miss horizontal", () => {
   const playerBoard = gameBoardFactory();
   playerBoard.placeShip("Submarine", "3", "4", "horizontal");
   playerBoard.receiveAttack("3", "4");
@@ -206,4 +206,23 @@ test("verify locations adjacent to sunk ship is marked miss", () => {
   expect(playerBoard.getBoard().get("4,5")).toBe("Miss");
   expect(playerBoard.getBoard().get("5,3")).toBe("Miss");
   expect(playerBoard.getBoard().get("5,5")).toBe("Miss");
+});
+
+test("verify locations adjacent to sunk ship is marked miss vertical", () => {
+  const playerBoard = gameBoardFactory();
+  playerBoard.placeShip("Battleship", "7", "1", "vertical");
+  playerBoard.receiveAttack("7", "1");
+  playerBoard.receiveAttack("7", "2");
+  playerBoard.receiveAttack("7", "3");
+  playerBoard.receiveAttack("7", "4");
+  expect(playerBoard.getBoard().get("7,0")).toBe("Miss");
+  expect(playerBoard.getBoard().get("6,1")).toBe("Miss");
+  expect(playerBoard.getBoard().get("8,1")).toBe("Miss");
+  expect(playerBoard.getBoard().get("6,2")).toBe("Miss");
+  expect(playerBoard.getBoard().get("8,2")).toBe("Miss");
+  expect(playerBoard.getBoard().get("6,3")).toBe("Miss");
+  expect(playerBoard.getBoard().get("8,3")).toBe("Miss");
+  expect(playerBoard.getBoard().get("6,4")).toBe("Miss");
+  expect(playerBoard.getBoard().get("8,4")).toBe("Miss");
+  expect(playerBoard.getBoard().get("7,5")).toBe("Miss");
 });
