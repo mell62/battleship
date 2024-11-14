@@ -35,6 +35,7 @@ function gameBoardFactory() {
     xCoord,
     yCoord,
     direction,
+    board,
   ) {
     if (shipLength === 0) {
       return false;
@@ -59,7 +60,7 @@ function gameBoardFactory() {
       ) {
         return true;
       }
-      return ifNextToShip(shipLength - 1, xCoord + 1, yCoord, direction);
+      return ifNextToShip(shipLength - 1, xCoord + 1, yCoord, direction, board);
     }
     if (
       ships.includes(board.get(upElement)) ||
@@ -69,7 +70,7 @@ function gameBoardFactory() {
     ) {
       return true;
     }
-    return ifNextToShip(shipLength - 1, xCoord, yCoord + 1, direction);
+    return ifNextToShip(shipLength - 1, xCoord, yCoord + 1, direction, board);
   };
 
   const recordPlacement = function recordShipsPlacement(
@@ -99,7 +100,7 @@ function gameBoardFactory() {
     if (
       !board.get(`${xCoord},${yCoord}`) &&
       !ifExceedBoard(length, xCoord, yCoord, direction) &&
-      !ifNextToShip(length, xCoord, yCoord, direction)
+      !ifNextToShip(length, xCoord, yCoord, direction, board)
     ) {
       while (counter < length) {
         board.set(`${xCoord},${yCoord}`, shipName);
@@ -219,6 +220,8 @@ function gameBoardFactory() {
 
   return {
     getBoard,
+    ifExceedBoard,
+    ifNextToShip,
     placeShip,
     receiveAttack,
     ifAllShipsSunk,
