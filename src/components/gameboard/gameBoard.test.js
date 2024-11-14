@@ -199,7 +199,7 @@ test("verify locations adjacent to sunk ship is marked miss", () => {
   playerBoard.receiveAttack("3", "4");
   playerBoard.receiveAttack("4", "4");
   playerBoard.receiveAttack("5", "4");
-  expect(playerBoard.getBoard().get("2,3")).toBe("Miss");
+  expect(playerBoard.getBoard().get("2,4")).toBe("Miss");
   expect(playerBoard.getBoard().get("3,3")).toBe("Miss");
   expect(playerBoard.getBoard().get("3,5")).toBe("Miss");
   expect(playerBoard.getBoard().get("4,3")).toBe("Miss");
