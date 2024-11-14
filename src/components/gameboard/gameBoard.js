@@ -126,6 +126,15 @@ function gameBoardFactory() {
     return shipObject[0];
   };
 
+  const filterCoordsOutsideBoard = function filterCoordsOutsideBoard(
+    arrayOfArrays,
+  ) {
+    arrayOfArrays = arrayOfArrays.filter((coords) => {
+      return coords.every((coord) => coord >= 0 && coord < 10);
+    });
+    return arrayOfArrays;
+  };
+
   const markAdjacentMissIfSunk = function markAdjacentMissIfSunk(board, ship) {
     if (ship.isSunk()) {
       const shipPlacement = getShipsCoords().find(
@@ -142,12 +151,11 @@ function gameBoardFactory() {
             [currentXCoord, currentYCoord + 1],
             [currentXCoord, currentYCoord - 1],
           ];
-          targetCoords = targetCoords.filter((coords) => {
-            return coords.every((coord) => coord >= 0 && coord < 10);
-          });
+          targetCoords = filterCoordsOutsideBoard(targetCoords);
           targetCoords.forEach((coord) => {
             if (!board.get(`${coord[0]},${coord[1]}`)) {
               board.set(`${coord[0]},${coord[1]}`, "Miss");
+              missedCoords.push({ xCoord: coord[0], yCoord: coord[1] });
             }
           });
           shipLength -= 1;
@@ -160,17 +168,15 @@ function gameBoardFactory() {
           [currentXCoord, currentYCoord + 1],
           [currentXCoord, currentYCoord - 1],
         ];
-        targetCoords = targetCoords.filter((coords) => {
-          return coords.every((coord) => coord >= 0 && coord < 10);
-        });
+        targetCoords = filterCoordsOutsideBoard(targetCoords);
         targetCoords.forEach((coord) => {
           if (!board.get(`${coord[0]},${coord[1]}`)) {
             board.set(`${coord[0]},${coord[1]}`, "Miss");
+            missedCoords.push({ xCoord: coord[0], yCoord: coord[1] });
           }
         });
         shipLength -= 1;
         currentYCoord += 1;
-        continue;
       }
     }
   };
