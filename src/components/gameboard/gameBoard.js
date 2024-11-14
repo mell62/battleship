@@ -136,12 +136,15 @@ function gameBoardFactory() {
       let currentYCoord = shipPlacement.yCoord;
       while (shipLength > 0) {
         if (shipPlacement.direction === "horizontal") {
-          const targetCoords = [
+          let targetCoords = [
             [currentXCoord + 1, currentYCoord],
             [currentXCoord - 1, currentYCoord],
             [currentXCoord, currentYCoord + 1],
             [currentXCoord, currentYCoord - 1],
           ];
+          targetCoords = targetCoords.filter((coords) => {
+            return coords.every((coord) => coord >= 0 && coord < 10);
+          });
           targetCoords.forEach((coord) => {
             if (!board.get(`${coord[0]},${coord[1]}`)) {
               board.set(`${coord[0]},${coord[1]}`, "Miss");
@@ -151,12 +154,15 @@ function gameBoardFactory() {
           currentXCoord += 1;
           continue;
         }
-        const targetCoords = [
+        let targetCoords = [
           [currentXCoord + 1, currentYCoord],
           [currentXCoord - 1, currentYCoord],
           [currentXCoord, currentYCoord + 1],
           [currentXCoord, currentYCoord - 1],
         ];
+        targetCoords = targetCoords.filter((coords) => {
+          return coords.every((coord) => coord >= 0 && coord < 10);
+        });
         targetCoords.forEach((coord) => {
           if (!board.get(`${coord[0]},${coord[1]}`)) {
             board.set(`${coord[0]},${coord[1]}`, "Miss");
