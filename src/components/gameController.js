@@ -18,11 +18,34 @@ player.board.placeShip("Destroyer", "7", "1", "horizontal");
 player.board.placeShip("Submarine", "4", "4", "horizontal");
 player.board.placeShip("Patrol Boat", "5", "7", "horizontal");
 
-computer.board.placeShip("Carrier", "1", "1", "horizontal");
-computer.board.placeShip("Battleship", "6", "3", "vertical");
-computer.board.placeShip("Destroyer", "0", "8", "horizontal");
-computer.board.placeShip("Submarine", "9", "0", "vertical");
-computer.board.placeShip("Patrol Boat", "7", "8", "horizontal");
+const placeComputerShips = function placeComputerShips() {
+  const ships = [
+    "Carrier",
+    "Battleship",
+    "Destroyer",
+    "Submarine",
+    "Patrol Boat",
+  ];
+
+  ships.forEach((ship) => {
+    const xCoord = Math.floor(Math.random() * 10);
+    const yCoord = Math.floor(Math.random() * 10);
+    const direction = Math.floor(Math.random() * 2);
+
+    if (direction === 0) {
+      computer.board.placeShip(
+        `${ship}`,
+        `${xCoord}`,
+        `${yCoord}`,
+        "horizontal",
+      );
+      return;
+    }
+    computer.board.placeShip(`${ship}`, `${xCoord}`, `${yCoord}`, "vertical");
+  });
+};
+
+placeComputerShips();
 
 function getPlayerBoard() {
   return player.board;
