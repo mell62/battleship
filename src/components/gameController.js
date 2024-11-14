@@ -3,6 +3,7 @@ import {
   renderComputerBoard,
   doAttack,
   renderPlayerBoard,
+  shipFactory,
 } from "../barrel";
 
 export { getPlayerBoard, getComputerBoard };
@@ -27,22 +28,63 @@ const placeComputerShips = function placeComputerShips() {
     "Patrol Boat",
   ];
 
-  ships.forEach((ship) => {
+  for (let i = 0; i < ships.length; i++) {
     const xCoord = Math.floor(Math.random() * 10);
     const yCoord = Math.floor(Math.random() * 10);
     const direction = Math.floor(Math.random() * 2);
 
     if (direction === 0) {
+      if (
+        computer.board.ifExceedBoard(
+          shipFactory(`${ships[i]}`).getLength(),
+          xCoord,
+          yCoord,
+          "horizontal",
+        ) ||
+        computer.board.ifNextToShip(
+          shipFactory(`${ships[i]}`).getLength(),
+          xCoord,
+          yCoord,
+          "horizontal",
+          computer.board.getBoard(),
+        )
+      ) {
+        i -= 1;
+        continue;
+      }
       computer.board.placeShip(
-        `${ship}`,
+        `${ships[i]}`,
         `${xCoord}`,
         `${yCoord}`,
         "horizontal",
       );
-      return;
+      continue;
     }
-    computer.board.placeShip(`${ship}`, `${xCoord}`, `${yCoord}`, "vertical");
-  });
+    if (
+      computer.board.ifExceedBoard(
+        shipFactory(`${ships[i]}`).getLength(),
+        xCoord,
+        yCoord,
+        "vertical",
+      ) ||
+      computer.board.ifNextToShip(
+        shipFactory(`${ships[i]}`).getLength(),
+        xCoord,
+        yCoord,
+        "vertical",
+        computer.board.getBoard(),
+      )
+    ) {
+      i -= 1;
+      continue;
+    }
+    computer.board.placeShip(
+      `${ships[i]}`,
+      `${xCoord}`,
+      `${yCoord}`,
+      "vertical",
+    );
+  }
 };
 
 placeComputerShips();
