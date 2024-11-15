@@ -9,9 +9,61 @@ import {
 export { getPlayerBoard, getComputerBoard };
 
 const computerBoard = document.querySelector(".computer-board");
+const playerBoard = document.querySelector(".player-board");
+const playerBoardElements = Array.from(
+  playerBoard.querySelectorAll(".player-coord"),
+);
+const playerShipsElements = document.querySelector(".player-ships-container");
+const classCoordPattern = /^\d-\d$/;
+let selectedShip = null;
 
 const player = playerFactory();
 const computer = playerFactory();
+
+playerShipsElements.addEventListener("click", (event) => {
+  if (event.target.classList.contains("player-ship")) {
+    let classes = Array.from(event.target.classList);
+    let ship = classes.find((className) => className !== "player-ship");
+    if (ship === "carrier") {
+      selectedShip = "Carrier";
+      return;
+    }
+    if (ship === "battleship") {
+      selectedShip = "Battleship";
+      return;
+    }
+    if (ship === "destroyer") {
+      selectedShip = "Destroyer";
+      return;
+    }
+    if (ship === "submarine") {
+      selectedShip = "Submarine";
+      return;
+    }
+    if (ship === "patrol-boat") {
+      selectedShip = "Patrol Boat";
+      return;
+    }
+  }
+});
+
+playerBoard.addEventListener("click", (event) => {
+  if (event.target.classList.contains("player-coord") && selectedShip) {
+    const classes = Array.from(event.target.classList);
+    const classCoord = classes.find((className) =>
+      classCoordPattern.test(className),
+    );
+    const xCoord = classCoord.slice(0, 1);
+    const yCoord = classCoord.slice(2, 3);
+    player.board.placeShip(
+      `${selectedShip}`,
+      `${xCoord}`,
+      `${yCoord}`,
+      "horizontal",
+    );
+    selectedShip = null;
+  }
+});
 
 player.board.placeShip("Carrier", "2", "3", "vertical");
 player.board.placeShip("Battleship", "9", "5", "vertical");
