@@ -4,15 +4,13 @@ import {
   doAttack,
   renderPlayerBoard,
   shipFactory,
+  disablePlayerShipButton,
 } from "../barrel";
 
 export { getPlayerBoard, getComputerBoard };
 
 const computerBoard = document.querySelector(".computer-board");
 const playerBoard = document.querySelector(".player-board");
-const playerBoardElements = Array.from(
-  playerBoard.querySelectorAll(".player-coord"),
-);
 const playerShipsElements = document.querySelector(".player-ships-container");
 const classCoordPattern = /^\d-\d$/;
 let selectedShip = null;
@@ -61,6 +59,7 @@ playerBoard.addEventListener("click", (event) => {
       `${yCoord}`,
       "horizontal",
     );
+    disablePlayerShipButton(selectedShip);
     selectedShip = null;
   }
 });

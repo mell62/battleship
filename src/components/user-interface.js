@@ -1,6 +1,6 @@
 import { getPlayerBoard, getComputerBoard } from "../barrel";
 
-export { renderPlayerBoard, renderComputerBoard };
+export { renderPlayerBoard, renderComputerBoard, disablePlayerShipButton };
 
 const playerBoardInterface = document.querySelector(".player-board");
 const playerBoardCoords = Array.from(
@@ -10,6 +10,44 @@ const computerBoardInterface = document.querySelector(".computer-board");
 const computerBoardCoords = Array.from(
   computerBoardInterface.querySelectorAll("*"),
 );
+
+const playerShipsElements = document.querySelector(".player-ships-container");
+const playerShipsButtons = Array.from(
+  playerShipsElements.querySelectorAll(".player-ship"),
+);
+
+const disablePlayerShipButton = function disablePlayerShipButton(shipName) {
+  if (shipName === "Carrier") {
+    const shipBtn = playerShipsButtons.find((btn) =>
+      btn.classList.contains("carrier"),
+    );
+    shipBtn.disabled = true;
+  }
+  if (shipName === "Battleship") {
+    const shipBtn = playerShipsButtons.find((btn) =>
+      btn.classList.contains("battleship"),
+    );
+    shipBtn.disabled = true;
+  }
+  if (shipName === "Destroyer") {
+    const shipBtn = playerShipsButtons.find((btn) =>
+      btn.classList.contains("destroyer"),
+    );
+    shipBtn.disabled = true;
+  }
+  if (shipName === "Submarine") {
+    const shipBtn = playerShipsButtons.find((btn) =>
+      btn.classList.contains("submarine"),
+    );
+    shipBtn.disabled = true;
+  }
+  if (shipName === "Patrol Boat") {
+    const shipBtn = playerShipsButtons.find((btn) =>
+      btn.classList.contains("patrol-boat"),
+    );
+    shipBtn.disabled = true;
+  }
+};
 
 const findCoordEle = function findCoordEle(coordsArray, coordClass) {
   const coordEle = coordsArray.find((coord) => {
