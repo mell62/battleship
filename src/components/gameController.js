@@ -66,15 +66,31 @@ const placePlayerShips = function placePlayerShips(event) {
     );
     const xCoord = classCoord.slice(0, 1);
     const yCoord = classCoord.slice(2, 3);
-    player.board.placeShip(
-      `${selectedShip}`,
-      `${xCoord}`,
-      `${yCoord}`,
-      "horizontal",
-    );
-    disablePlayerShipButton(selectedShip);
-    selectedShip = null;
-    renderPlayerBoard();
+    if (
+      !player.board.ifExceedBoard(
+        shipFactory(selectedShip).getLength(),
+        Number(xCoord),
+        Number(yCoord),
+        "horizontal",
+      ) &&
+      !player.board.ifNextToShip(
+        shipFactory(selectedShip).getLength(),
+        Number(xCoord),
+        Number(yCoord),
+        "horizontal",
+        player.board.getBoard(),
+      )
+    ) {
+      player.board.placeShip(
+        `${selectedShip}`,
+        `${xCoord}`,
+        `${yCoord}`,
+        "horizontal",
+      );
+      disablePlayerShipButton(selectedShip);
+      selectedShip = null;
+      renderPlayerBoard();
+    }
   }
 };
 
