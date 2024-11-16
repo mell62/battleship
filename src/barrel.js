@@ -7,4 +7,10 @@ export {
   renderComputerBoard,
   disablePlayerShipButton,
 } from "./components/user-interface";
-export { getPlayerBoard, getComputerBoard } from "./components/gameController";
+export {
+  getPlayerBoard,
+  getComputerBoard,
+  placePlayerShips,
+  placeComputerShips,
+  doComputerAttack,
+} from "./components/gameController";

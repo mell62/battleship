@@ -7,16 +7,29 @@ import {
   disablePlayerShipButton,
 } from "../barrel";
 
-export { getPlayerBoard, getComputerBoard };
+export {
+  getPlayerBoard,
+  getComputerBoard,
+  placePlayerShips,
+  placeComputerShips,
+  doComputerAttack,
+};
 
-const computerBoard = document.querySelector(".computer-board");
-const playerBoard = document.querySelector(".player-board");
 const playerShipsElements = document.querySelector(".player-ships-container");
+const playerShipsButtons = Array.from(
+  playerShipsElements.querySelectorAll(".player-ship"),
+);
 const classCoordPattern = /^\d-\d$/;
 let selectedShip = null;
 
 const player = playerFactory();
 const computer = playerFactory();
+
+const ifAllShipsPlaced = function ifAllShipsPlaced() {
+  if (playerShipsButtons.every((btn) => btn.disabled === true)) {
+    return true;
+  }
+};
 
 playerShipsElements.addEventListener("click", (event) => {
   if (event.target.classList.contains("player-ship")) {
@@ -45,7 +58,7 @@ playerShipsElements.addEventListener("click", (event) => {
   }
 });
 
-playerBoard.addEventListener("click", (event) => {
+const placePlayerShips = function placePlayerShips(event) {
   if (event.target.classList.contains("player-coord") && selectedShip) {
     const classes = Array.from(event.target.classList);
     const classCoord = classes.find((className) =>
@@ -61,14 +74,9 @@ playerBoard.addEventListener("click", (event) => {
     );
     disablePlayerShipButton(selectedShip);
     selectedShip = null;
+    renderPlayerBoard();
   }
-});
-
-player.board.placeShip("Carrier", "2", "3", "vertical");
-player.board.placeShip("Battleship", "9", "5", "vertical");
-player.board.placeShip("Destroyer", "7", "1", "horizontal");
-player.board.placeShip("Submarine", "4", "4", "horizontal");
-player.board.placeShip("Patrol Boat", "5", "7", "horizontal");
+};
 
 const placeComputerShips = function placeComputerShips() {
   const ships = [
@@ -138,8 +146,6 @@ const placeComputerShips = function placeComputerShips() {
   }
 };
 
-placeComputerShips();
-
 function getPlayerBoard() {
   return player.board;
 }
@@ -148,11 +154,11 @@ function getComputerBoard() {
   return computer.board;
 }
 
-computerBoard.addEventListener("click", (event) => {
+const doComputerAttack = function doComputerAttack(event) {
   if (computer.board.ifAllShipsSunk() || player.board.ifAllShipsSunk()) return;
-  if (event.target.classList.contains("computer-coord")) {
+  if (event.target.classList.contains("computer-coord") && ifAllShipsPlaced()) {
     doAttack(player.board, computer.board, event.target);
     renderComputerBoard();
     renderPlayerBoard();
   }
-});
+};
