@@ -19,8 +19,10 @@ const playerShipsElements = document.querySelector(".player-ships-container");
 const playerShipsButtons = Array.from(
   playerShipsElements.querySelectorAll(".player-ship"),
 );
+const directionBtn = document.querySelector(".direction-btn");
 const classCoordPattern = /^\d-\d$/;
 let selectedShip = null;
+let selectedDirection = "horizontal";
 
 const player = playerFactory();
 const computer = playerFactory();
@@ -58,6 +60,14 @@ playerShipsElements.addEventListener("click", (event) => {
   }
 });
 
+directionBtn.addEventListener("click", () => {
+  if (selectedDirection === "horizontal") {
+    selectedDirection = "vertical";
+    return;
+  }
+  selectedDirection = "horizontal";
+});
+
 const placePlayerShips = function placePlayerShips(event) {
   if (event.target.classList.contains("player-coord") && selectedShip) {
     const classes = Array.from(event.target.classList);
@@ -71,13 +81,13 @@ const placePlayerShips = function placePlayerShips(event) {
         shipFactory(selectedShip).getLength(),
         Number(xCoord),
         Number(yCoord),
-        "horizontal",
+        selectedDirection,
       ) &&
       !player.board.ifNextToShip(
         shipFactory(selectedShip).getLength(),
         Number(xCoord),
         Number(yCoord),
-        "horizontal",
+        selectedDirection,
         player.board.getBoard(),
       )
     ) {
@@ -85,7 +95,7 @@ const placePlayerShips = function placePlayerShips(event) {
         `${selectedShip}`,
         `${xCoord}`,
         `${yCoord}`,
-        "horizontal",
+        selectedDirection,
       );
       disablePlayerShipButton(selectedShip);
       selectedShip = null;
