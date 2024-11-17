@@ -140,18 +140,30 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
     const length = shipFactory(getSelectedShip()).getLength();
     if (getSelectedDirection() === "horizontal") {
       for (let i = 0; i < length; i++) {
-        const targetCoord = playerBoardInterface.querySelector(
-          `.${CSS.escape(xCoord + i)}-${yCoord}`,
-        );
-        targetCoord.classList.add("ship-selected-hover");
+        if (
+          playerBoardInterface.querySelector(
+            `.${CSS.escape(xCoord + i)}-${yCoord}`,
+          )
+        ) {
+          const targetCoord = playerBoardInterface.querySelector(
+            `.${CSS.escape(xCoord + i)}-${yCoord}`,
+          );
+          targetCoord.classList.add("ship-selected-hover");
+        }
       }
       return;
     }
     for (let i = 0; i < length; i++) {
-      const targetCoord = playerBoardInterface.querySelector(
-        `.${CSS.escape(xCoord)}-${yCoord + i}`,
-      );
-      targetCoord.classList.add("ship-selected-hover");
+      if (
+        playerBoardInterface.querySelector(
+          `.${CSS.escape(xCoord)}-${yCoord + i}`,
+        )
+      ) {
+        const targetCoord = playerBoardInterface.querySelector(
+          `.${CSS.escape(xCoord)}-${yCoord + i}`,
+        );
+        targetCoord.classList.add("ship-selected-hover");
+      }
     }
   }
 });
@@ -173,22 +185,35 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
         yCoord,
         getSelectedDirection(),
         playerBoard.getBoard(),
-      )
+      ) ||
+      playerBoard.ifExceedBoard(length, xCoord, yCoord, getSelectedDirection())
     ) {
       if (getSelectedDirection() === "horizontal") {
         for (let i = 0; i < length; i++) {
-          const targetCoord = playerBoardInterface.querySelector(
-            `.${CSS.escape(xCoord + i)}-${yCoord}`,
-          );
-          targetCoord.classList.add("invalid-coord-hover");
+          if (
+            playerBoardInterface.querySelector(
+              `.${CSS.escape(xCoord + i)}-${yCoord}`,
+            )
+          ) {
+            const targetCoord = playerBoardInterface.querySelector(
+              `.${CSS.escape(xCoord + i)}-${yCoord}`,
+            );
+            targetCoord.classList.add("invalid-coord-hover");
+          }
         }
         return;
       }
       for (let i = 0; i < length; i++) {
-        const targetCoord = playerBoardInterface.querySelector(
-          `.${CSS.escape(xCoord)}-${yCoord + i}`,
-        );
-        targetCoord.classList.add("invalid-coord-hover");
+        if (
+          playerBoardInterface.querySelector(
+            `.${CSS.escape(xCoord)}-${yCoord + i}`,
+          )
+        ) {
+          const targetCoord = playerBoardInterface.querySelector(
+            `.${CSS.escape(xCoord)}-${yCoord + i}`,
+          );
+          targetCoord.classList.add("invalid-coord-hover");
+        }
       }
     }
   }
