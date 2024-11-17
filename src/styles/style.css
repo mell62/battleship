@@ -50,7 +50,7 @@ body {
 }
 
 .empty-coord-hover:hover,
-.ship-selected-hover:hover {
+.ship-selected-hover {
   cursor: pointer;
   background-color: #25d68c;
 }

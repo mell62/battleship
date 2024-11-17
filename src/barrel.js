@@ -15,4 +15,5 @@ export {
   doComputerAttack,
   ifAllShipsPlaced,
   getSelectedShip,
+  getSelectedDirection,
 } from "./components/gameController";

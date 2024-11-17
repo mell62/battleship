@@ -3,6 +3,8 @@ import {
   getComputerBoard,
   ifAllShipsPlaced,
   getSelectedShip,
+  getSelectedDirection,
+  shipFactory,
 } from "../barrel";
 
 export { renderPlayerBoard, renderComputerBoard, disablePlayerShipButton };
@@ -20,6 +22,8 @@ const playerShipsElements = document.querySelector(".player-ships-container");
 const playerShipsButtons = Array.from(
   playerShipsElements.querySelectorAll(".player-ship"),
 );
+
+const classCoordPattern = /^\d-\d$/;
 
 const disablePlayerShipButton = function disablePlayerShipButton(shipName) {
   if (shipName === "Carrier") {
@@ -123,6 +127,30 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
 
 playerBoardInterface.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("player-coord") && getSelectedShip()) {
-    event.target.classList.add("ship-selected-hover");
+    playerBoardCoords.forEach(
+      (coord) => coord.classList.remove("ship-selected-hover"), // to not let hover style persist when mouse leaves it
+    );
+    const classes = Array.from(event.target.classList);
+    const firstCoord = classes.find((className) =>
+      classCoordPattern.test(className),
+    );
+    const xCoord = Number(firstCoord.slice(0, 1));
+    const yCoord = Number(firstCoord.slice(2, 3));
+    const length = shipFactory(getSelectedShip()).getLength();
+    if (getSelectedDirection() === "horizontal") {
+      for (let i = 0; i < length; i++) {
+        const targetCoord = playerBoardInterface.querySelector(
+          `.${CSS.escape(xCoord + i)}-${yCoord}`,
+        );
+        targetCoord.classList.add("ship-selected-hover");
+      }
+      return;
+    }
+    for (let i = 0; i < length; i++) {
+      const targetCoord = playerBoardInterface.querySelector(
+        `.${CSS.escape(xCoord)}-${yCoord + i}`,
+      );
+      targetCoord.classList.add("ship-selected-hover");
+    }
   }
 });
