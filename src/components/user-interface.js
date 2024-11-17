@@ -1,4 +1,4 @@
-import { getPlayerBoard, getComputerBoard } from "../barrel";
+import { getPlayerBoard, getComputerBoard, ifAllShipsPlaced } from "../barrel";
 
 export { renderPlayerBoard, renderComputerBoard, disablePlayerShipButton };
 
@@ -75,7 +75,8 @@ function renderPlayerBoard() {
   missedCoords.forEach((coord) => {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
-    coordEle.style.backgroundColor = "black";
+    coordEle.style.backgroundColor = "#16161a";
+    coordEle.textContent = "X";
   });
 }
 
@@ -98,6 +99,13 @@ function renderComputerBoard() {
   missedCoords.forEach((coord) => {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
-    coordEle.style.backgroundColor = "black";
+    coordEle.style.backgroundColor = "#16161a";
+    coordEle.textContent = "X";
   });
 }
+
+computerBoardInterface.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("computer-coord") && ifAllShipsPlaced()) {
+    event.target.classList.add("empty-coord-hover");
+  }
+});

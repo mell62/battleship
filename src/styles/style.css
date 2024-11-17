@@ -5,6 +5,7 @@
 
 body {
   background-color: var(--background-color);
+  color: white;
 }
 
 .boards-container {
@@ -46,4 +47,10 @@ body {
   border-right: none;
   width: 2rem;
   height: 2rem;
+}
+
+.empty-coord-hover:hover,
+.ship-selected-hover:hover {
+  cursor: pointer;
+  background-color: #25d68c;
 }

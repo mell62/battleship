@@ -13,6 +13,7 @@ export {
   placePlayerShips,
   placeComputerShips,
   doComputerAttack,
+  ifAllShipsPlaced,
 };
 
 const playerShipsElements = document.querySelector(".player-ships-container");
