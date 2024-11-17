@@ -14,4 +14,5 @@ export {
   placeComputerShips,
   doComputerAttack,
   ifAllShipsPlaced,
+  getSelectedShip,
 } from "./components/gameController";

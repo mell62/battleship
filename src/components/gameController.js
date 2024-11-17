@@ -14,6 +14,7 @@ export {
   placeComputerShips,
   doComputerAttack,
   ifAllShipsPlaced,
+  getSelectedShip,
 };
 
 const playerShipsElements = document.querySelector(".player-ships-container");
@@ -32,6 +33,10 @@ const ifAllShipsPlaced = function ifAllShipsPlaced() {
   if (playerShipsButtons.every((btn) => btn.disabled === true)) {
     return true;
   }
+};
+
+const getSelectedShip = function getSelectedShip() {
+  return selectedShip;
 };
 
 playerShipsElements.addEventListener("click", (event) => {

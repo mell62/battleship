@@ -1,4 +1,9 @@
-import { getPlayerBoard, getComputerBoard, ifAllShipsPlaced } from "../barrel";
+import {
+  getPlayerBoard,
+  getComputerBoard,
+  ifAllShipsPlaced,
+  getSelectedShip,
+} from "../barrel";
 
 export { renderPlayerBoard, renderComputerBoard, disablePlayerShipButton };
 
@@ -107,5 +112,17 @@ function renderComputerBoard() {
 computerBoardInterface.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("computer-coord") && ifAllShipsPlaced()) {
     event.target.classList.add("empty-coord-hover");
+  }
+});
+
+playerBoardInterface.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("player-coord") && !getSelectedShip()) {
+    event.target.classList.remove("ship-selected-hover");
+  }
+});
+
+playerBoardInterface.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("player-coord") && getSelectedShip()) {
+    event.target.classList.add("ship-selected-hover");
   }
 });
