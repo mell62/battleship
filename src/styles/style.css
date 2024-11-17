@@ -1,3 +1,12 @@
+:root {
+  --background-color: #16161a;
+  --primary-color: #2cb67d;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
 .boards-container {
   display: flex;
   gap: 8rem;
@@ -10,7 +19,31 @@
 }
 
 .coord {
-  border: 0.1rem solid black;
+  border: 0.1rem solid var(--primary-color);
+  width: 2rem;
+  height: 2rem;
+}
+
+.coord:nth-child(-n + 10) {
+  border-top: none;
+  width: 2rem;
+  height: 2rem;
+}
+
+.coord:nth-last-child(-n + 10) {
+  border-bottom: none;
+  width: 2rem;
+  height: 2rem;
+}
+
+.coord:nth-child(10n + 1) {
+  border-left: none;
+  width: 2rem;
+  height: 2rem;
+}
+
+.coord:nth-child(10n) {
+  border-right: none;
   width: 2rem;
   height: 2rem;
 }
