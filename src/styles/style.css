@@ -1,6 +1,7 @@
 :root {
   --background-color: #16161a;
   --primary-color: #2cb67d;
+  --red: #e53170;
 }
 
 body {
@@ -53,4 +54,9 @@ body {
 .ship-selected-hover {
   cursor: pointer;
   background-color: #25d68c;
+}
+
+.invalid-coord-hover {
+  cursor: pointer;
+  background-color: var(--red);
 }

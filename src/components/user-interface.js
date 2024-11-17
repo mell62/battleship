@@ -127,9 +127,10 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
 
 playerBoardInterface.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("player-coord") && getSelectedShip()) {
-    playerBoardCoords.forEach(
-      (coord) => coord.classList.remove("ship-selected-hover"), // to not let hover style persist when mouse leaves it
-    );
+    playerBoardCoords.forEach((coord) => {
+      coord.classList.remove("ship-selected-hover"); // to not let hover style persist when mouse leaves it
+      coord.classList.remove("invalid-coord-hover");
+    });
     const classes = Array.from(event.target.classList);
     const firstCoord = classes.find((className) =>
       classCoordPattern.test(className),
@@ -151,6 +152,44 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
         `.${CSS.escape(xCoord)}-${yCoord + i}`,
       );
       targetCoord.classList.add("ship-selected-hover");
+    }
+  }
+});
+
+playerBoardInterface.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("player-coord") && getSelectedShip()) {
+    const classes = Array.from(event.target.classList);
+    const firstCoord = classes.find((className) =>
+      classCoordPattern.test(className),
+    );
+    const xCoord = Number(firstCoord.slice(0, 1));
+    const yCoord = Number(firstCoord.slice(2, 3));
+    const length = shipFactory(getSelectedShip()).getLength();
+    const playerBoard = getPlayerBoard();
+    if (
+      playerBoard.ifNextToShip(
+        length,
+        xCoord,
+        yCoord,
+        getSelectedDirection(),
+        playerBoard.getBoard(),
+      )
+    ) {
+      if (getSelectedDirection() === "horizontal") {
+        for (let i = 0; i < length; i++) {
+          const targetCoord = playerBoardInterface.querySelector(
+            `.${CSS.escape(xCoord + i)}-${yCoord}`,
+          );
+          targetCoord.classList.add("invalid-coord-hover");
+        }
+        return;
+      }
+      for (let i = 0; i < length; i++) {
+        const targetCoord = playerBoardInterface.querySelector(
+          `.${CSS.escape(xCoord)}-${yCoord + i}`,
+        );
+        targetCoord.classList.add("invalid-coord-hover");
+      }
     }
   }
 });
