@@ -7,7 +7,12 @@ import {
   shipFactory,
 } from "../barrel";
 
-export { renderPlayerBoard, renderComputerBoard, disablePlayerShipButton };
+export {
+  renderPlayerBoard,
+  renderComputerBoard,
+  disablePlayerShipButton,
+  updateStartGameMessage,
+};
 
 const playerBoardInterface = document.querySelector(".player-board");
 const playerBoardCoords = Array.from(
@@ -22,6 +27,8 @@ const playerShipsElements = document.querySelector(".player-ships-container");
 const playerShipsButtons = Array.from(
   playerShipsElements.querySelectorAll(".player-ship"),
 );
+
+const gameMessageEle = document.querySelector(".game-message");
 
 const classCoordPattern = /^\d-\d$/;
 
@@ -218,3 +225,7 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
     }
   }
 });
+
+const updateStartGameMessage = function updateStartGameMessage() {
+  gameMessageEle.textContent = "Launch your attack on enemy waters!";
+};

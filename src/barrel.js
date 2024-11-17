@@ -6,6 +6,7 @@ export {
   renderPlayerBoard,
   renderComputerBoard,
   disablePlayerShipButton,
+  updateStartGameMessage,
 } from "./components/user-interface";
 export {
   getPlayerBoard,

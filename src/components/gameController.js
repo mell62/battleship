@@ -5,6 +5,7 @@ import {
   renderPlayerBoard,
   shipFactory,
   disablePlayerShipButton,
+  updateStartGameMessage,
 } from "../barrel";
 
 export {
@@ -111,6 +112,9 @@ const placePlayerShips = function placePlayerShips(event) {
       disablePlayerShipButton(selectedShip);
       selectedShip = null;
       renderPlayerBoard();
+      if (ifAllShipsPlaced()) {
+        updateStartGameMessage();
+      }
     }
   }
 };
