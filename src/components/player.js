@@ -1,10 +1,22 @@
-import { gameBoardFactory } from "../barrel";
+import {
+  gameBoardFactory,
+  updatePlayerMissMessage,
+  updatePlayerHitMessage,
+  updatePlayerSinkShipMessage,
+  updatePlayerWinMessage,
+  updateComputerAttackMessage,
+  updateComputerMissMessage,
+  updateComputerHitMessage,
+  updateComputerSinkShipMessage,
+  updateComputerWinMessage,
+} from "../barrel";
 
 export { playerFactory, doAttack };
 
 const classCoordPattern = /^\d-\d$/;
 let lastHit = null;
-let sunkShips = 0;
+let sunkPlayerShips = 0;
+let sunkComputerShips = 0;
 let attackDirection = null;
 let initialHitCoord = null;
 
@@ -252,18 +264,18 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
   if (
     lastHit &&
     attackDirection &&
-    sunkShips === gameBoard.getNumberOfSunkShips()
+    sunkPlayerShips === gameBoard.getNumberOfSunkShips()
   ) {
     attackAppropriateDirection(gameBoard, lastHit[0], lastHit[1]);
     return;
   }
-  if (lastHit && sunkShips === gameBoard.getNumberOfSunkShips()) {
+  if (lastHit && sunkPlayerShips === gameBoard.getNumberOfSunkShips()) {
     attackRandomAdjacentCoord(gameBoard, lastHit[0], lastHit[1]);
     return;
   }
   lastHit = null;
   attackDirection = null;
-  sunkShips = gameBoard.getNumberOfSunkShips();
+  sunkPlayerShips = gameBoard.getNumberOfSunkShips();
   gameBoard.receiveAttack(xCoord, yCoord);
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [xCoord, yCoord];
@@ -284,6 +296,18 @@ const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
     return false;
   }
   gameBoard.receiveAttack(xCoord, yCoord);
+  if (gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit") {
+    updatePlayerHitMessage();
+    if (sunkComputerShips !== gameBoard.getNumberOfSunkShips()) {
+      updatePlayerSinkShipMessage();
+      sunkComputerShips = gameBoard.getNumberOfSunkShips();
+    }
+  } else {
+    updatePlayerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updatePlayerWinMessage();
+  }
   return true;
 };
 
