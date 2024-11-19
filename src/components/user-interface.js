@@ -12,6 +12,15 @@ export {
   renderComputerBoard,
   disablePlayerShipButton,
   updateStartGameMessage,
+  updatePlayerMissMessage,
+  updatePlayerHitMessage,
+  updatePlayerSinkShipMessage,
+  updatePlayerWinMessage,
+  updateComputerAttackMessage,
+  updateComputerMissMessage,
+  updateComputerHitMessage,
+  updateComputerSinkShipMessage,
+  updateComputerWinMessage,
 };
 
 const playerBoardInterface = document.querySelector(".player-board");
@@ -228,4 +237,40 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
 
 const updateStartGameMessage = function updateStartGameMessage() {
   gameMessageEle.textContent = "Launch your attack on enemy waters!";
+};
+
+const updatePlayerMissMessage = function updatePlayerMissMessage() {
+  gameMessageEle.textContent = "We missed.";
+};
+
+const updatePlayerHitMessage = function updatePlayerHitMessage() {
+  gameMessageEle.textContent = "We hit them!";
+};
+
+const updatePlayerSinkShipMessage = function updatePlayerSinkShipMessage() {
+  gameMessageEle.textContent = "Good job, enemy ship down.";
+};
+
+const updatePlayerWinMessage = function updatePlayerWinMessage() {
+  gameMessageEle.textContent = "We conquered!";
+};
+
+const updateComputerMissMessage = function updateComputerMissMessage() {
+  gameMessageEle.textContent = "Enemy missed.";
+};
+
+const updateComputerHitMessage = function updateComputerHitMessage() {
+  gameMessageEle.textContent = "The enemy hit us.";
+};
+
+const updateComputerSinkShipMessage = function updateComputerSinkShipMessage() {
+  gameMessageEle.textContent = "Mayday. Our ship is down.";
+};
+
+const updateComputerAttackMessage = function updateComputerAttackMessage() {
+  gameMessageEle.textContent = "Standing by for enemy engagement...";
+};
+
+const updateComputerWinMessage = function updateComputerWinMessage() {
+  gameMessageEle.textContent = "We went down, do better next time.";
 };

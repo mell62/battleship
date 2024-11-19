@@ -7,6 +7,15 @@ export {
   renderComputerBoard,
   disablePlayerShipButton,
   updateStartGameMessage,
+  updatePlayerMissMessage,
+  updatePlayerHitMessage,
+  updatePlayerSinkShipMessage,
+  updatePlayerWinMessage,
+  updateComputerAttackMessage,
+  updateComputerMissMessage,
+  updateComputerHitMessage,
+  updateComputerSinkShipMessage,
+  updateComputerWinMessage,
 } from "./components/user-interface";
 export {
   getPlayerBoard,
