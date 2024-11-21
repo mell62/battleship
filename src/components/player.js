@@ -83,8 +83,14 @@ const attackHorizontalRight = function attackHorizontalRight(
     lastHit = [Number(xCoord) + 1, Number(yCoord)];
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
+    if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateComputerSinkShipMessage();
+    }
   } else {
     updateComputerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updateComputerWinMessage();
   }
   return;
 };
@@ -128,8 +134,14 @@ const attackHorizontalLeft = function attackHorizontalLeft(
     lastHit = [Number(xCoord) - 1, Number(yCoord)];
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
+    if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateComputerSinkShipMessage();
+    }
   } else {
     updateComputerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updateComputerWinMessage();
   }
   return;
 };
@@ -173,8 +185,14 @@ const attackVerticalDown = function attackVerticalDown(
     lastHit = [Number(xCoord), Number(yCoord) + 1];
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
+    if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateComputerSinkShipMessage();
+    }
   } else {
     updateComputerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updateComputerWinMessage();
   }
   return;
 };
@@ -214,8 +232,14 @@ const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
     lastHit = [Number(xCoord), Number(yCoord) - 1];
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
+    if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateComputerSinkShipMessage();
+    }
   } else {
     updateComputerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updateComputerWinMessage();
   }
   return;
 };
@@ -253,6 +277,9 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
     lastHit = attackingCoords;
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
+    if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateComputerSinkShipMessage();
+    }
     if (
       JSON.stringify(attackingCoords) ===
       JSON.stringify([Number(xCoord) + 1, Number(yCoord)])
@@ -279,6 +306,9 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
     }
   } else {
     updateComputerMissMessage();
+  }
+  if (gameBoard.ifAllShipsSunk()) {
+    updateComputerWinMessage();
   }
 };
 
