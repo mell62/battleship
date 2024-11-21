@@ -349,6 +349,9 @@ const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
 
 const doAttack = function doAttack(playerBoard, computerBoard, coordEle) {
   if (doPlayerAttack(computerBoard, coordEle)) {
+    if (computerBoard.ifAllShipsSunk()) {
+      return;
+    }
     doComputerAttack(playerBoard);
   }
 };
