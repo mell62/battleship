@@ -317,40 +317,45 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
 };
 
 const doComputerAttack = function doComputerAttack(gameBoard) {
-  const xCoord = Math.floor(Math.random() * 10).toString();
-  const yCoord = Math.floor(Math.random() * 10).toString();
-  let hitCounter = gameBoard.getHits();
-  if (
-    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
-    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
-  ) {
-    // To avoid already attacked cells to be attacked again
-    doComputerAttack(gameBoard);
-    return;
-  }
-  if (
-    lastHit &&
-    attackDirection &&
-    sunkPlayerShips === gameBoard.getNumberOfSunkShips()
-  ) {
-    attackAppropriateDirection(gameBoard, lastHit[0], lastHit[1]);
-    return;
-  }
-  if (lastHit && sunkPlayerShips === gameBoard.getNumberOfSunkShips()) {
-    attackRandomAdjacentCoord(gameBoard, lastHit[0], lastHit[1]);
-    return;
-  }
-  lastHit = null;
-  attackDirection = null;
-  sunkPlayerShips = gameBoard.getNumberOfSunkShips();
-  gameBoard.receiveAttack(xCoord, yCoord);
-  if (hitCounter !== gameBoard.getHits()) {
-    lastHit = [xCoord, yCoord];
-    hitCounter = gameBoard.getHits();
-    updateComputerHitMessage();
-  } else {
-    updateComputerMissMessage();
-  }
+  setTimeout(() => {
+    updateComputerAttackMessage();
+    setTimeout(() => {
+      const xCoord = Math.floor(Math.random() * 10).toString();
+      const yCoord = Math.floor(Math.random() * 10).toString();
+      let hitCounter = gameBoard.getHits();
+      if (
+        gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
+        gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
+      ) {
+        // To avoid already attacked cells to be attacked again
+        doComputerAttack(gameBoard);
+        return;
+      }
+      if (
+        lastHit &&
+        attackDirection &&
+        sunkPlayerShips === gameBoard.getNumberOfSunkShips()
+      ) {
+        attackAppropriateDirection(gameBoard, lastHit[0], lastHit[1]);
+        return;
+      }
+      if (lastHit && sunkPlayerShips === gameBoard.getNumberOfSunkShips()) {
+        attackRandomAdjacentCoord(gameBoard, lastHit[0], lastHit[1]);
+        return;
+      }
+      lastHit = null;
+      attackDirection = null;
+      sunkPlayerShips = gameBoard.getNumberOfSunkShips();
+      gameBoard.receiveAttack(xCoord, yCoord);
+      if (hitCounter !== gameBoard.getHits()) {
+        lastHit = [xCoord, yCoord];
+        hitCounter = gameBoard.getHits();
+        updateComputerHitMessage();
+      } else {
+        updateComputerMissMessage();
+      }
+    }, 2000);
+  }, 2000);
 };
 
 const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
