@@ -82,6 +82,9 @@ const attackHorizontalRight = function attackHorizontalRight(
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [Number(xCoord) + 1, Number(yCoord)];
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
+  } else {
+    updateComputerMissMessage();
   }
   return;
 };
@@ -124,6 +127,9 @@ const attackHorizontalLeft = function attackHorizontalLeft(
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [Number(xCoord) - 1, Number(yCoord)];
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
+  } else {
+    updateComputerMissMessage();
   }
   return;
 };
@@ -166,8 +172,10 @@ const attackVerticalDown = function attackVerticalDown(
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [Number(xCoord), Number(yCoord) + 1];
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
+  } else {
+    updateComputerMissMessage();
   }
-
   return;
 };
 
@@ -205,6 +213,9 @@ const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [Number(xCoord), Number(yCoord) - 1];
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
+  } else {
+    updateComputerMissMessage();
   }
   return;
 };
@@ -241,6 +252,7 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
     initialHitCoord = lastHit;
     lastHit = attackingCoords;
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
     if (
       JSON.stringify(attackingCoords) ===
       JSON.stringify([Number(xCoord) + 1, Number(yCoord)])
@@ -265,6 +277,8 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
     ) {
       attackDirection = "verticalUp";
     }
+  } else {
+    updateComputerMissMessage();
   }
 };
 
@@ -299,6 +313,9 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
   if (hitCounter !== gameBoard.getHits()) {
     lastHit = [xCoord, yCoord];
     hitCounter = gameBoard.getHits();
+    updateComputerHitMessage();
+  } else {
+    updateComputerMissMessage();
   }
 };
 
