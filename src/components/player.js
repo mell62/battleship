@@ -55,6 +55,7 @@ const attackHorizontalRight = function attackHorizontalRight(
       gameBoard.receiveAttack(Number(xCoord) + 1, Number(yCoord));
       attackDirection = "horizontalLeft";
       lastHit = initialHitCoord;
+      updateComputerMissMessage();
       return;
     }
     //to avoid attacking outside board
@@ -106,6 +107,7 @@ const attackHorizontalLeft = function attackHorizontalLeft(
       gameBoard.receiveAttack(Number(xCoord) - 1, Number(yCoord));
       attackDirection = "horizontalRight";
       lastHit = initialHitCoord;
+      updateComputerMissMessage();
       return;
     }
     //to avoid attacking outside board
@@ -157,6 +159,7 @@ const attackVerticalDown = function attackVerticalDown(
       gameBoard.receiveAttack(Number(xCoord), Number(yCoord) + 1);
       attackDirection = "verticalUp";
       lastHit = initialHitCoord;
+      updateComputerMissMessage();
       return;
     }
     //to avoid attacking outside board
@@ -204,6 +207,7 @@ const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
       gameBoard.receiveAttack(Number(xCoord), Number(yCoord) - 1);
       attackDirection = "verticalDown";
       lastHit = initialHitCoord;
+      updateComputerMissMessage();
       return;
     }
     //to avoid attacking outside board
