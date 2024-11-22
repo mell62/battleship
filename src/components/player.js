@@ -19,6 +19,7 @@ let sunkPlayerShips = 0;
 let sunkComputerShips = 0;
 let attackDirection = null;
 let initialHitCoord = null;
+let computerAttackLoaded = true;
 
 function playerFactory() {
   const board = gameBoardFactory();
@@ -317,9 +318,11 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
 };
 
 const doComputerAttack = function doComputerAttack(gameBoard) {
+  computerAttackLoaded = false;
   setTimeout(() => {
     updateComputerAttackMessage();
     setTimeout(() => {
+      computerAttackLoaded = true;
       const xCoord = Math.floor(Math.random() * 10).toString();
       const yCoord = Math.floor(Math.random() * 10).toString();
       let hitCounter = gameBoard.getHits();
@@ -359,31 +362,33 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
 };
 
 const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
-  const classes = Array.from(coordEle.classList);
-  const classCoord = classes.find((coord) => classCoordPattern.test(coord));
-  const xCoord = classCoord.slice(0, 1);
-  const yCoord = classCoord.slice(2, 3);
-  if (
-    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
-    gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
-  ) {
-    // To avoid already attacked cells to be attacked again
-    return false;
-  }
-  gameBoard.receiveAttack(xCoord, yCoord);
-  if (gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit") {
-    updatePlayerHitMessage();
-    if (sunkComputerShips !== gameBoard.getNumberOfSunkShips()) {
-      updatePlayerSinkShipMessage();
-      sunkComputerShips = gameBoard.getNumberOfSunkShips();
+  if (computerAttackLoaded) {
+    const classes = Array.from(coordEle.classList);
+    const classCoord = classes.find((coord) => classCoordPattern.test(coord));
+    const xCoord = classCoord.slice(0, 1);
+    const yCoord = classCoord.slice(2, 3);
+    if (
+      gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit" ||
+      gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Miss"
+    ) {
+      // To avoid already attacked cells to be attacked again
+      return false;
     }
-  } else {
-    updatePlayerMissMessage();
+    gameBoard.receiveAttack(xCoord, yCoord);
+    if (gameBoard.getBoard().get(`${xCoord},${yCoord}`) === "Hit") {
+      updatePlayerHitMessage();
+      if (sunkComputerShips !== gameBoard.getNumberOfSunkShips()) {
+        updatePlayerSinkShipMessage();
+        sunkComputerShips = gameBoard.getNumberOfSunkShips();
+      }
+    } else {
+      updatePlayerMissMessage();
+    }
+    if (gameBoard.ifAllShipsSunk()) {
+      updatePlayerWinMessage();
+    }
+    return true;
   }
-  if (gameBoard.ifAllShipsSunk()) {
-    updatePlayerWinMessage();
-  }
-  return true;
 };
 
 const doAttack = function doAttack(playerBoard, computerBoard, coordEle) {
