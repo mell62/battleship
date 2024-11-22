@@ -6,6 +6,7 @@ export {
   renderPlayerBoard,
   renderComputerBoard,
   disablePlayerShipButton,
+  removePlayerShipsInterface,
   updateStartGameMessage,
   updatePlayerMissMessage,
   updatePlayerHitMessage,

@@ -11,6 +11,7 @@ export {
   renderPlayerBoard,
   renderComputerBoard,
   disablePlayerShipButton,
+  removePlayerShipsInterface,
   updateStartGameMessage,
   updatePlayerMissMessage,
   updatePlayerHitMessage,
@@ -32,6 +33,9 @@ const computerBoardCoords = Array.from(
   computerBoardInterface.querySelectorAll("*"),
 );
 
+const playerShipsPlacementInterface = document.querySelector(
+  ".player-ship-placement-module",
+);
 const playerShipsElements = document.querySelector(".player-ships-container");
 const playerShipsButtons = Array.from(
   playerShipsElements.querySelectorAll(".player-ship"),
@@ -242,6 +246,10 @@ playerBoardInterface.addEventListener("click", (event) => {
     });
   }
 });
+
+const removePlayerShipsInterface = function removePlayerShipsInterface() {
+  playerShipsPlacementInterface.style.display = "none";
+};
 
 const updateStartGameMessage = function updateStartGameMessage() {
   gameMessageEle.textContent = "Launch your attack on enemy waters!";

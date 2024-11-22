@@ -6,6 +6,7 @@ import {
   shipFactory,
   disablePlayerShipButton,
   updateStartGameMessage,
+  removePlayerShipsInterface,
 } from "../barrel";
 
 export {
@@ -114,6 +115,7 @@ const placePlayerShips = function placePlayerShips(event) {
       renderPlayerBoard();
       if (ifAllShipsPlaced()) {
         updateStartGameMessage();
+        removePlayerShipsInterface();
       }
     }
   }
