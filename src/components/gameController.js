@@ -202,6 +202,6 @@ const doComputerAttack = function doComputerAttack(event) {
   if (event.target.classList.contains("computer-coord") && ifAllShipsPlaced()) {
     doAttack(player.board, computer.board, event.target);
     renderComputerBoard();
-    setTimeout(() => renderPlayerBoard(), 4100);
+    setTimeout(() => renderPlayerBoard(), 6100);
   }
 };

@@ -357,7 +357,7 @@ const doComputerAttack = function doComputerAttack(gameBoard) {
       } else {
         updateComputerMissMessage();
       }
-    }, 2000);
+    }, 4000);
   }, 2000);
 };
 
