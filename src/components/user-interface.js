@@ -235,6 +235,14 @@ playerBoardInterface.addEventListener("mouseover", (event) => {
   }
 });
 
+playerBoardInterface.addEventListener("click", (event) => {
+  if (event.target.classList.contains("player-coord") && getSelectedShip()) {
+    playerBoardCoords.forEach((coord) => {
+      coord.classList.remove("ship-selected-hover"); // to remove style once ship has been placed
+    });
+  }
+});
+
 const updateStartGameMessage = function updateStartGameMessage() {
   gameMessageEle.textContent = "Launch your attack on enemy waters!";
 };
