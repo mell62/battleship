@@ -121,6 +121,15 @@ const placePlayerShips = function placePlayerShips(event) {
   }
 };
 
+document.addEventListener("click", (event) => {
+  if (
+    !event.target.classList.contains("player-ship") &&
+    !event.target.classList.contains("direction-btn")
+  ) {
+    selectedShip = null;
+  }
+});
+
 const placeComputerShips = function placeComputerShips() {
   const ships = [
     "Carrier",
