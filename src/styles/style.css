@@ -60,3 +60,37 @@ body {
   cursor: pointer;
   background-color: var(--red);
 }
+
+.player-ship-placement-module {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.player-ships-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.player-ship,
+.direction-btn {
+  cursor: pointer;
+  height: 4rem;
+  width: 8rem;
+  border-left: 0.4rem solid var(--primary-color);
+  border-right: 0.4rem solid var(--primary-color);
+  border-top: 0.2rem solid var(--primary-color);
+  border-bottom: 0.1rem solid var(--primary-color);
+  border-radius: 0.2rem;
+  background-color: var(--background-color);
+  color: white;
+  box-shadow: 0rem 1rem 0rem 0 var(--primary-color);
+  transition: 0.2s ease-in-out;
+}
+
+.player-ship:focus,
+.direction-btn:focus {
+  transform: translateY(1rem);
+  box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
+}
