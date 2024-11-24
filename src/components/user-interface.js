@@ -257,6 +257,26 @@ document.addEventListener("mouseover", (event) => {
   }
 });
 
+playerShipsElements.addEventListener("click", (event) => {
+  if (event.target.classList.contains("player-ship")) {
+    playerShipsButtons.forEach((shipBtn) => {
+      shipBtn.classList.remove("player-ship-focus");
+    });
+    event.target.classList.add("player-ship-focus");
+  }
+});
+
+document.addEventListener("click", (event) => {
+  if (
+    !event.target.classList.contains("direction-btn") &&
+    !event.target.classList.contains("player-ship")
+  ) {
+    playerShipsButtons.forEach((shipBtn) => {
+      shipBtn.classList.remove("player-ship-focus");
+    });
+  }
+});
+
 const removePlayerShipsInterface = function removePlayerShipsInterface() {
   playerShipsPlacementInterface.style.display = "none";
 };
