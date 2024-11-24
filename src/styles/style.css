@@ -2,6 +2,7 @@
   --background-color: #16161a;
   --primary-color: #2cb67d;
   --red: #e53170;
+  --purple: #7f5af0;
 }
 
 body {
@@ -78,10 +79,9 @@ body {
   cursor: pointer;
   height: 4rem;
   width: 8rem;
-  border-left: 0.4rem solid var(--primary-color);
-  border-right: 0.4rem solid var(--primary-color);
-  border-top: 0.2rem solid var(--primary-color);
-  border-bottom: 0.1rem solid var(--primary-color);
+  border-width: 0.2rem 0.4rem 0.2rem 0.4rem;
+  border-style: solid;
+  border-color: var(--primary-color);
   border-radius: 0.2rem;
   background-color: var(--background-color);
   color: white;
@@ -91,11 +91,19 @@ body {
 
 .direction-btn {
   transition: 0.1s ease-out;
+  border-color: var(--purple);
+  box-shadow: 0rem 1rem 0rem 0 var(--purple);
 }
 
 .player-ship-focus {
   transform: translateY(1rem);
   box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
+}
+
+.player-ship:disabled {
+  transform: translateY(1rem);
+  box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
+  border-color: var(--red);
 }
 
 .direction-btn:active {
