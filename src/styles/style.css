@@ -89,8 +89,16 @@ body {
   transition: 0.2s ease-in-out;
 }
 
-.player-ship:focus,
-.direction-btn:focus {
+.direction-btn {
+  transition: 0.1s ease-out;
+}
+
+.player-ship:focus {
+  transform: translateY(1rem);
+  box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
+}
+
+.direction-btn:active {
   transform: translateY(1rem);
   box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
 }
