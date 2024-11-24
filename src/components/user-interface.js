@@ -243,6 +243,16 @@ playerBoardInterface.addEventListener("click", (event) => {
   if (event.target.classList.contains("player-coord") && getSelectedShip()) {
     playerBoardCoords.forEach((coord) => {
       coord.classList.remove("ship-selected-hover"); // to remove style once ship has been placed
+      coord.classList.remove("invalid-coord-hover");
+    });
+  }
+});
+
+document.addEventListener("mouseover", (event) => {
+  if (!event.target.classList.contains("player-coord") && getSelectedShip()) {
+    playerBoardCoords.forEach((coord) => {
+      coord.classList.remove("ship-selected-hover"); // to not let hover style persist when mouse leaves it
+      coord.classList.remove("invalid-coord-hover");
     });
   }
 });
