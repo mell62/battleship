@@ -8,47 +8,57 @@
 body {
   background-color: var(--background-color);
   color: white;
+  height: 100vh;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 
 .boards-container {
   display: flex;
-  gap: 8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20rem;
 }
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(10, 2rem);
-  grid-template-rows: repeat(10, 2rem);
+  grid-template-columns: repeat(10, 3.5rem);
+  grid-template-rows: repeat(10, 3.5rem);
 }
 
 .coord {
   border: 0.1rem solid var(--primary-color);
-  width: 2rem;
-  height: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .coord:nth-child(-n + 10) {
   border-top: none;
-  width: 2rem;
-  height: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .coord:nth-last-child(-n + 10) {
   border-bottom: none;
-  width: 2rem;
-  height: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .coord:nth-child(10n + 1) {
   border-left: none;
-  width: 2rem;
-  height: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .coord:nth-child(10n) {
   border-right: none;
-  width: 2rem;
-  height: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .empty-coord-hover:hover,
