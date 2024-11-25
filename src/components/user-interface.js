@@ -96,7 +96,7 @@ function renderPlayerBoard() {
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
     coordEle.textContent = "O";
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
-      coordEle.style.backgroundColor = "red";
+      coordEle.style.backgroundColor = "#e53170";
       return;
     }
   });
@@ -119,7 +119,7 @@ function renderComputerBoard() {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
-      coordEle.style.backgroundColor = "red";
+      coordEle.style.backgroundColor = "#e53170";
       return;
     }
     coordEle.textContent = "O";
