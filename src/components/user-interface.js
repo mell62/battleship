@@ -103,8 +103,10 @@ function renderPlayerBoard() {
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
 
     coordEle.innerHTML = shipSVG;
+    coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
       coordEle.innerHTML = hitSVG;
+      coordEle.querySelector("svg").setAttribute("fill", "#e53170");
       return;
     }
   });
@@ -113,6 +115,7 @@ function renderPlayerBoard() {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
     coordEle.innerHTML = missSVG;
+    coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
   });
 }
 
@@ -127,6 +130,7 @@ function renderComputerBoard() {
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
       coordEle.innerHTML = hitSVG;
+      coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
       return;
     }
     coordEle.innerHTML = shipSVG;
@@ -136,6 +140,7 @@ function renderComputerBoard() {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
     coordEle.innerHTML = missSVG;
+    coordEle.querySelector("svg").setAttribute("fill", "#e53170");
   });
 }
 

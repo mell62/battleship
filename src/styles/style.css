@@ -130,6 +130,5 @@ body {
 .miss-icon {
   width: 2rem;
   height: auto;
-  fill: var(--primary-color);
   pointer-events: none;
 }
