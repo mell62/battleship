@@ -278,7 +278,7 @@ document.addEventListener("click", (event) => {
 });
 
 const removePlayerShipsInterface = function removePlayerShipsInterface() {
-  playerShipsPlacementInterface.style.display = "none";
+  playerShipsPlacementInterface.style.opacity = "0";
 };
 
 const updateStartGameMessage = function updateStartGameMessage() {
