@@ -36,6 +36,9 @@ body {
   border: 0.1rem solid var(--primary-color);
   width: 3rem;
   height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .coord:nth-child(-n + 10) {
@@ -120,4 +123,13 @@ body {
 .direction-btn:active {
   transform: translateY(1rem);
   box-shadow: 0rem 0rem 0rem 0 var(--primary-color);
+}
+
+.ship-icon,
+.hit-icon,
+.miss-icon {
+  width: 2rem;
+  height: auto;
+  fill: var(--primary-color);
+  pointer-events: none;
 }

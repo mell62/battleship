@@ -43,6 +43,13 @@ const playerShipsButtons = Array.from(
 
 const gameMessageEle = document.querySelector(".game-message");
 
+const shipSVG = `<?xml version="1.0" encoding="utf-8"?>
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="ship-icon"><path d="M15 1V2H17V3H18V4H19V5H20V7H21V15H20V17H19V18H18V19H17V20H15V21H7V20H5V19H4V18H3V17H2V15H1V7H2V5H3V4H4V3H5V2H7V1H15M14 3H8V4H6V5H5V6H4V8H3V14H4V16H5V17H6V18H8V19H14V18H16V17H17V16H18V14H19V8H18V6H17V5H16V4H14V3Z" /></svg>`;
+const missSVG = `<?xml version="1.0" encoding="utf-8"?>
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="miss-icon"><path d="M16 16H14V15H13V14H12V13H10V14H9V15H8V16H6V14H7V13H8V12H9V10H8V9H7V8H6V6H8V7H9V8H10V9H12V8H13V7H14V6H16V8H15V9H14V10H13V12H14V13H15V14H16Z" /></svg>`;
+const hitSVG = `<?xml version="1.0" encoding="utf-8"?>
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="hit-icon"><path d="M14 20H7V19H6V18H5V17H4V12H5V10H6V9H7V8H8V9H9V11H10V9H11V5H10V4H9V3H8V2H11V3H13V4H14V5H15V6H16V7H17V9H18V16H17V18H16V19H14M12 18V17H14V16H15V14H16V10H15V8H14V7H13V11H12V13H11V14H10V15H9V14H8V11H7V12H6V16H7V17H8V18Z" /></svg>`;
+
 const classCoordPattern = /^\d-\d$/;
 
 const disablePlayerShipButton = function disablePlayerShipButton(shipName) {
@@ -94,9 +101,10 @@ function renderPlayerBoard() {
     const coordBoard = `${coord.xCoord},${coord.yCoord}`;
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
-    coordEle.textContent = "O";
+
+    coordEle.innerHTML = shipSVG;
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
-      coordEle.style.backgroundColor = "#e53170";
+      coordEle.innerHTML = hitSVG;
       return;
     }
   });
@@ -104,8 +112,7 @@ function renderPlayerBoard() {
   missedCoords.forEach((coord) => {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
-    coordEle.style.backgroundColor = "#16161a";
-    coordEle.textContent = "X";
+    coordEle.innerHTML = missSVG;
   });
 }
 
@@ -119,17 +126,16 @@ function renderComputerBoard() {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
-      coordEle.style.backgroundColor = "#e53170";
+      coordEle.innerHTML = hitSVG;
       return;
     }
-    coordEle.textContent = "O";
+    coordEle.innerHTML = shipSVG;
   });
 
   missedCoords.forEach((coord) => {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
-    coordEle.style.backgroundColor = "#16161a";
-    coordEle.textContent = "X";
+    coordEle.innerHTML = missSVG;
   });
 }
 
