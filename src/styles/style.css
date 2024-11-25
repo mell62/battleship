@@ -14,8 +14,9 @@ body {
 #content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   height: 100%;
+  gap: 4rem;
 }
 
 .boards-container {
@@ -27,38 +28,38 @@ body {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(10, 3.5rem);
-  grid-template-rows: repeat(10, 3.5rem);
+  grid-template-columns: repeat(10, 3rem);
+  grid-template-rows: repeat(10, 3rem);
 }
 
 .coord {
   border: 0.1rem solid var(--primary-color);
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .coord:nth-child(-n + 10) {
   border-top: none;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .coord:nth-last-child(-n + 10) {
   border-bottom: none;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .coord:nth-child(10n + 1) {
   border-left: none;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .coord:nth-child(10n) {
   border-right: none;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .empty-coord-hover:hover,
