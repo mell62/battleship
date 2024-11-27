@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100%;
   gap: 4rem;
 }
@@ -28,6 +29,11 @@ body {
 
 .game-message {
   color: var(--primary-color);
+  border: 0.1rem solid var(--primary-color);
+  border-radius: 0.2rem;
+  width: 40rem;
+  padding: 1rem;
+  text-align: center;
 }
 
 .boards-container {
