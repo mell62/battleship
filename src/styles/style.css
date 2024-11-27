@@ -9,6 +9,8 @@ body {
   background-color: var(--background-color);
   color: white;
   height: 100vh;
+  font-family: "Tiny5", sans-serif;
+  font-size: 1.2rem;
 }
 
 #content {
@@ -17,6 +19,15 @@ body {
   justify-content: center;
   height: 100%;
   gap: 4rem;
+}
+
+.hero-text {
+  font-family: "Silkscreen", sans-serif;
+  font-size: 2rem;
+}
+
+.game-message {
+  color: var(--primary-color);
 }
 
 .boards-container {
