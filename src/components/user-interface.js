@@ -5,6 +5,7 @@ import {
   getSelectedShip,
   getSelectedDirection,
   shipFactory,
+  getSunkShipCoords,
 } from "../barrel";
 
 export {
@@ -22,6 +23,7 @@ export {
   updateComputerHitMessage,
   updateComputerSinkShipMessage,
   updateComputerWinMessage,
+  updateSunkShipIcons,
 };
 
 const playerBoardInterface = document.querySelector(".player-board");
@@ -49,6 +51,8 @@ const missSVG = `<?xml version="1.0" encoding="utf-8"?>
 <svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="miss-icon"><path d="M16 16H14V15H13V14H12V13H10V14H9V15H8V16H6V14H7V13H8V12H9V10H8V9H7V8H6V6H8V7H9V8H10V9H12V8H13V7H14V6H16V8H15V9H14V10H13V12H14V13H15V14H16Z" /></svg>`;
 const hitSVG = `<?xml version="1.0" encoding="utf-8"?>
 <svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="hit-icon"><path d="M14 20H7V19H6V18H5V17H4V12H5V10H6V9H7V8H8V9H9V11H10V9H11V5H10V4H9V3H8V2H11V3H13V4H14V5H15V6H16V7H17V9H18V16H17V18H16V19H14M12 18V17H14V16H15V14H16V10H15V8H14V7H13V11H12V13H11V14H10V15H9V14H8V11H7V12H6V16H7V17H8V18Z" /></svg>`;
+const sunkSVG = `<?xml version="1.0" encoding="utf-8"?>
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="sunk-icon"><path d="M6 2H8V1H14V2H16V3H17V4H18V5H19V7H20V14H19V16H18V20H17V21H5V20H4V16H3V14H2V8H3V5H4V4H5V3H6V2M15 5V4H13V3H9V4H7V5H6V6H5V9H4V13H5V15H6V19H8V17H10V19H12V17H14V19H16V15H17V13H18V8H17V6H16V5H15M7 8H10V11H7V8M12 11V8H15V11H12M10 13H12V15H10V13Z" /></svg>`;
 
 const classCoordPattern = /^\d-\d$/;
 
@@ -330,4 +334,32 @@ const updateComputerAttackMessage = function updateComputerAttackMessage() {
 
 const updateComputerWinMessage = function updateComputerWinMessage() {
   gameMessageEle.textContent = "We went down, do better next time.";
+};
+
+const updateSunkShipIcons = function updateSunkShipIcons(
+  xCoord,
+  yCoord,
+  gameBoard,
+  enemyPlayer,
+) {
+  const sunkShipCoords = getSunkShipCoords(xCoord, yCoord, gameBoard);
+  if (enemyPlayer === "player") {
+    sunkShipCoords.forEach((sunkCoord) => {
+      const className = `${sunkCoord.xCoord}-${sunkCoord.yCoord}`;
+      const coordEle = findCoordEle(playerBoardCoords, className);
+      coordEle.innerHTML = sunkSVG;
+    });
+    return;
+  }
+  if (enemyPlayer === "computer") {
+    sunkShipCoords.forEach((sunkCoord) => {
+      const className = `${sunkCoord.xCoord}-${sunkCoord.yCoord}`;
+      const coordEle = findCoordEle(computerBoardCoords, className);
+      setTimeout(() => {
+        coordEle.innerHTML = sunkSVG;
+      }, 0);
+      console.log(coordEle);
+    });
+    return;
+  }
 };

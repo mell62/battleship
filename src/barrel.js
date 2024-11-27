@@ -1,6 +1,9 @@
-export { playerFactory, doAttack } from "./components/player";
+export {
+  playerFactory,
+  doAttack,
+  getSunkShipCoords,
+} from "./components/player";
 export { shipFactory } from "./components/ship";
-
 export { gameBoardFactory } from "./components/gameboard/gameBoard";
 export {
   renderPlayerBoard,
@@ -17,6 +20,7 @@ export {
   updateComputerHitMessage,
   updateComputerSinkShipMessage,
   updateComputerWinMessage,
+  updateSunkShipIcons,
 } from "./components/user-interface";
 export {
   getPlayerBoard,

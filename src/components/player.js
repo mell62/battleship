@@ -9,9 +9,10 @@ import {
   updateComputerHitMessage,
   updateComputerSinkShipMessage,
   updateComputerWinMessage,
+  updateSunkShipIcons,
 } from "../barrel";
 
-export { playerFactory, doAttack };
+export { playerFactory, doAttack, getSunkShipCoords };
 
 const classCoordPattern = /^\d-\d$/;
 let lastHit = null;
@@ -379,6 +380,12 @@ const doPlayerAttack = function doPlayerAttack(gameBoard, coordEle) {
       updatePlayerHitMessage();
       if (sunkComputerShips !== gameBoard.getNumberOfSunkShips()) {
         updatePlayerSinkShipMessage();
+        updateSunkShipIcons(
+          Number(xCoord),
+          Number(yCoord),
+          gameBoard,
+          "computer",
+        );
         sunkComputerShips = gameBoard.getNumberOfSunkShips();
       }
     } else {
@@ -397,5 +404,198 @@ const doAttack = function doAttack(playerBoard, computerBoard, coordEle) {
       return;
     }
     doComputerAttack(playerBoard);
+  }
+};
+
+const getShipFromCoords = function getShipFromCoords(
+  xCoord,
+  yCoord,
+  gameBoard,
+) {
+  const shipCoords = gameBoard.getShipsCoords();
+  const targetShipCoord = shipCoords.find(
+    (shipCoord) => shipCoord.xCoord === xCoord && shipCoord.yCoord === yCoord,
+  );
+  const shipName = targetShipCoord.shipName;
+  return shipName;
+};
+
+const getSunkShipCoords = function getSunkShipCoords(
+  xCoord,
+  yCoord,
+  gameBoard,
+) {
+  const shipName = getShipFromCoords(xCoord, yCoord, gameBoard);
+  const originShipCoord = gameBoard
+    .getShipsCoords()
+    .find((shipCoord) => shipCoord.shipName === shipName);
+  const sunkShipCoords = [];
+  if (originShipCoord.direction === "horizontal") {
+    if (shipName === "Patrol Boat") {
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 1,
+        yCoord: originShipCoord.yCoord,
+      });
+      return sunkShipCoords;
+    }
+    if (shipName === "Submarine") {
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 1,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 2,
+        yCoord: originShipCoord.yCoord,
+      });
+      return sunkShipCoords;
+    }
+    if (shipName === "Destroyer") {
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 1,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 2,
+        yCoord: originShipCoord.yCoord,
+      });
+      return sunkShipCoords;
+    }
+    if (shipName === "Battleship") {
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 1,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 2,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 3,
+        yCoord: originShipCoord.yCoord,
+      });
+      return sunkShipCoords;
+    }
+    if (shipName === "Carrier") {
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 1,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 2,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 3,
+        yCoord: originShipCoord.yCoord,
+      });
+      sunkShipCoords.push({
+        xCoord: originShipCoord.xCoord + 4,
+        yCoord: originShipCoord.yCoord,
+      });
+      return sunkShipCoords;
+    }
+  }
+  if (shipName === "Patrol Boat") {
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 1,
+    });
+    return sunkShipCoords;
+  }
+  if (shipName === "Submarine") {
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 1,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 2,
+    });
+    return sunkShipCoords;
+  }
+  if (shipName === "Destroyer") {
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 1,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 2,
+    });
+    return sunkShipCoords;
+  }
+  if (shipName === "Battleship") {
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 1,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 2,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 3,
+    });
+    return sunkShipCoords;
+  }
+  if (shipName === "Carrier") {
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 1,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 2,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 3,
+    });
+    sunkShipCoords.push({
+      xCoord: originShipCoord.xCoord,
+      yCoord: originShipCoord.yCoord + 4,
+    });
+    return sunkShipCoords;
   }
 };

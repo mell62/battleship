@@ -127,7 +127,8 @@ body {
 
 .ship-icon,
 .hit-icon,
-.miss-icon {
+.miss-icon,
+.sunk-icon {
   width: 2rem;
   height: auto;
   pointer-events: none;
