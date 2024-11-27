@@ -87,6 +87,7 @@ const attackHorizontalRight = function attackHorizontalRight(
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
     if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateSunkShipIcons(Number(xCoord), Number(yCoord), gameBoard, "player");
       updateComputerSinkShipMessage();
     }
   } else {
@@ -139,6 +140,7 @@ const attackHorizontalLeft = function attackHorizontalLeft(
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
     if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateSunkShipIcons(Number(xCoord), Number(yCoord), gameBoard, "player");
       updateComputerSinkShipMessage();
     }
   } else {
@@ -191,6 +193,7 @@ const attackVerticalDown = function attackVerticalDown(
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
     if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateSunkShipIcons(Number(xCoord), Number(yCoord), gameBoard, "player");
       updateComputerSinkShipMessage();
     }
   } else {
@@ -239,6 +242,7 @@ const attackVerticalUp = function attackVerticalUp(gameBoard, xCoord, yCoord) {
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
     if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateSunkShipIcons(Number(xCoord), Number(yCoord), gameBoard, "player");
       updateComputerSinkShipMessage();
     }
   } else {
@@ -284,6 +288,7 @@ const attackRandomAdjacentCoord = function attackRandomAdjacentCoord(
     hitCounter = gameBoard.getHits();
     updateComputerHitMessage();
     if (sunkPlayerShips !== gameBoard.getNumberOfSunkShips()) {
+      updateSunkShipIcons(Number(xCoord), Number(yCoord), gameBoard, "player");
       updateComputerSinkShipMessage();
     }
     if (

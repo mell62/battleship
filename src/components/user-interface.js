@@ -105,7 +105,12 @@ function renderPlayerBoard() {
     const coordBoard = `${coord.xCoord},${coord.yCoord}`;
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(playerBoardCoords, coordClass);
-
+    if (
+      coordEle.querySelector("svg") &&
+      coordEle.querySelector("svg").classList.contains("sunk-icon")
+    ) {
+      return;
+    }
     coordEle.innerHTML = shipSVG;
     coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
@@ -133,6 +138,12 @@ function renderComputerBoard() {
     const coordClass = `${coord.xCoord}-${coord.yCoord}`;
     const coordEle = findCoordEle(computerBoardCoords, coordClass);
     if (gameBoard.getBoard().get(coordBoard) === "Hit") {
+      if (
+        coordEle.querySelector("svg") &&
+        coordEle.querySelector("svg").classList.contains("sunk-icon")
+      ) {
+        return;
+      }
       coordEle.innerHTML = hitSVG;
       coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
       return;
@@ -347,7 +358,10 @@ const updateSunkShipIcons = function updateSunkShipIcons(
     sunkShipCoords.forEach((sunkCoord) => {
       const className = `${sunkCoord.xCoord}-${sunkCoord.yCoord}`;
       const coordEle = findCoordEle(playerBoardCoords, className);
-      coordEle.innerHTML = sunkSVG;
+      setTimeout(() => {
+        coordEle.innerHTML = sunkSVG;
+        coordEle.querySelector("svg").setAttribute("fill", "#e53170");
+      }, 0);
     });
     return;
   }
@@ -357,8 +371,8 @@ const updateSunkShipIcons = function updateSunkShipIcons(
       const coordEle = findCoordEle(computerBoardCoords, className);
       setTimeout(() => {
         coordEle.innerHTML = sunkSVG;
+        coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
       }, 0);
-      console.log(coordEle);
     });
     return;
   }
