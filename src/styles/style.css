@@ -111,6 +111,15 @@ body {
   align-items: center;
 }
 
+.player-ship-placement-module-inactive {
+  opacity: 0;
+}
+
+.player-ship-placement-module-inactive .player-ship,
+.player-ship-placement-module-inactive .direction-btn {
+  cursor: default;
+}
+
 .player-ships-container {
   display: flex;
   gap: 2rem;

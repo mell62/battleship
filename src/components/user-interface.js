@@ -307,7 +307,9 @@ document.addEventListener("click", (event) => {
 });
 
 const removePlayerShipsInterface = function removePlayerShipsInterface() {
-  playerShipsPlacementInterface.style.opacity = "0";
+  playerShipsPlacementInterface.classList.toggle(
+    "player-ship-placement-module-inactive",
+  );
 };
 
 const updateStartGameMessage = function updateStartGameMessage() {
