@@ -15,7 +15,8 @@ Check it out :point_right:[here!](https://mell62.github.io/battleship/):point_le
 ## :tada: Achievements
 
 - **Webpack** is utilized for the bundling of code of multiple files through ES6 Modules and minification
-- **Jest** testing framework is used for unit testing game logic, ensuring integrity and high-quality code through test-driven development
+- **Jest** testing framework is used for unit testing game logic, ensuring integrity and bug-resistant code
+- **Test-driven-development** principles practised through Jest, ensuring high-quality code
 
 ## :grey_exclamation: Limitations
 
