@@ -22,9 +22,20 @@ body {
   gap: 4rem;
 }
 
+.hero-container {
+  display: flex;
+  align-items: center;
+}
+
 .hero-text {
   font-family: "Silkscreen", sans-serif;
   font-size: 2rem;
+  cursor: default;
+}
+
+.hero-logo {
+  width: 3rem;
+  height: auto;
 }
 
 .game-message {
@@ -45,14 +56,14 @@ body {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(10, 3rem);
-  grid-template-rows: repeat(10, 3rem);
+  grid-template-columns: repeat(10, 2.8rem);
+  grid-template-rows: repeat(10, 2.8rem);
 }
 
 .coord {
   border: 0.1rem solid var(--primary-color);
-  width: 3rem;
-  height: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,26 +71,18 @@ body {
 
 .coord:nth-child(-n + 10) {
   border-top: none;
-  width: 3rem;
-  height: 3rem;
 }
 
 .coord:nth-last-child(-n + 10) {
   border-bottom: none;
-  width: 3rem;
-  height: 3rem;
 }
 
 .coord:nth-child(10n + 1) {
   border-left: none;
-  width: 3rem;
-  height: 3rem;
 }
 
 .coord:nth-child(10n) {
   border-right: none;
-  width: 3rem;
-  height: 3rem;
 }
 
 .empty-coord-hover:hover,
