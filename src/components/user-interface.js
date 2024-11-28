@@ -24,6 +24,7 @@ export {
   updateComputerSinkShipMessage,
   updateComputerWinMessage,
   updateSunkShipIcons,
+  updateDirectionBtn,
 };
 
 const playerBoardInterface = document.querySelector(".player-board");
@@ -42,6 +43,8 @@ const playerShipsElements = document.querySelector(".player-ships-container");
 const playerShipsButtons = Array.from(
   playerShipsElements.querySelectorAll(".player-ship"),
 );
+
+const directionBtn = document.querySelector(".direction-btn");
 
 const gameMessageEle = document.querySelector(".game-message");
 
@@ -378,4 +381,8 @@ const updateSunkShipIcons = function updateSunkShipIcons(
     });
     return;
   }
+};
+
+const updateDirectionBtn = function updateDirectionBtn(direction) {
+  directionBtn.textContent = `Direction: ${direction}`;
 };

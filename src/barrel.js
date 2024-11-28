@@ -21,6 +21,7 @@ export {
   updateComputerSinkShipMessage,
   updateComputerWinMessage,
   updateSunkShipIcons,
+  updateDirectionBtn,
 } from "./components/user-interface";
 export {
   getPlayerBoard,

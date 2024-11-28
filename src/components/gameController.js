@@ -7,6 +7,7 @@ import {
   disablePlayerShipButton,
   updateStartGameMessage,
   removePlayerShipsInterface,
+  updateDirectionBtn,
 } from "../barrel";
 
 export {
@@ -75,9 +76,11 @@ playerShipsElements.addEventListener("click", (event) => {
 
 directionBtn.addEventListener("click", () => {
   if (selectedDirection === "horizontal") {
+    updateDirectionBtn("Vertical");
     selectedDirection = "vertical";
     return;
   }
+  updateDirectionBtn("Horizontal");
   selectedDirection = "horizontal";
 });
 
