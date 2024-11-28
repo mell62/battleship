@@ -10,7 +10,7 @@ body {
   color: white;
   height: 100vh;
   font-family: "Tiny5", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 #content {
@@ -19,7 +19,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  gap: 4rem;
+  gap: 2.5rem;
 }
 
 .hero-container {
@@ -34,7 +34,7 @@ body {
 }
 
 .hero-logo {
-  width: 3rem;
+  width: 4rem;
   height: auto;
 }
 
@@ -52,6 +52,14 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20rem;
+}
+
+.player-board-container,
+.computer-board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 .gameboard {
