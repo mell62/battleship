@@ -308,35 +308,36 @@ const removePlayerShipsInterface = function removePlayerShipsInterface() {
 };
 
 const updateStartGameMessage = function updateStartGameMessage() {
-  gameMessageEle.textContent = "Launch your attack on enemy waters!";
+  gameMessageEle.textContent = "Launch your attack on enemy waters.";
 };
 
 const updatePlayerMissMessage = function updatePlayerMissMessage() {
-  gameMessageEle.textContent = "We missed.";
+  gameMessageEle.textContent = "Shots fired, no contact - recalibrate weapons.";
 };
 
 const updatePlayerHitMessage = function updatePlayerHitMessage() {
-  gameMessageEle.textContent = "We hit them!";
+  gameMessageEle.textContent = "Direct hit! Keep up the attack.";
 };
 
 const updatePlayerSinkShipMessage = function updatePlayerSinkShipMessage() {
-  gameMessageEle.textContent = "Good job, enemy ship down.";
+  gameMessageEle.textContent = "Solid work, enemy ship compromised.";
 };
 
 const updatePlayerWinMessage = function updatePlayerWinMessage() {
-  gameMessageEle.textContent = "We conquered!";
+  gameMessageEle.textContent =
+    "Enemy resistance crushed - the fleet is victorious!";
 };
 
 const updateComputerMissMessage = function updateComputerMissMessage() {
-  gameMessageEle.textContent = "Enemy missed.";
+  gameMessageEle.textContent = "Incoming fire dodged - maintain position.";
 };
 
 const updateComputerHitMessage = function updateComputerHitMessage() {
-  gameMessageEle.textContent = "The enemy hit us.";
+  gameMessageEle.textContent = "We're hit! Stay vigilant.";
 };
 
 const updateComputerSinkShipMessage = function updateComputerSinkShipMessage() {
-  gameMessageEle.textContent = "Mayday. Our ship is down.";
+  gameMessageEle.textContent = "Mayday. Our ship has been compromised.";
 };
 
 const updateComputerAttackMessage = function updateComputerAttackMessage() {
@@ -344,7 +345,8 @@ const updateComputerAttackMessage = function updateComputerAttackMessage() {
 };
 
 const updateComputerWinMessage = function updateComputerWinMessage() {
-  gameMessageEle.textContent = "We went down, do better next time.";
+  gameMessageEle.textContent =
+    "All ships lost... The enemy has claimed the seas.";
 };
 
 const updateSunkShipIcons = function updateSunkShipIcons(
