@@ -151,7 +151,6 @@ function renderComputerBoard() {
       coordEle.querySelector("svg").setAttribute("fill", "#2cb67d");
       return;
     }
-    coordEle.innerHTML = shipSVG;
   });
 
   missedCoords.forEach((coord) => {
